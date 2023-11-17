@@ -11,3 +11,43 @@
   flex-direction: column;
   position: relative;
 }
+
+.sectionInfo {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+}
+
+.sectionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.containerInfo {
+  width: 30%;
+  padding: 40px;
+}
+
+.titleBrand {
+  font-size: 24px;
+  color: #FF3E3E;
+  font-weight: 500;
+  line-height: 16px;
+  margin: 0;
+}
+
+.titleModel {
+  font-size: 64px;
+  line-height: 76px;
+  color: white;
+  margin: 0;
+}
+
+.descriptionText {
+  font-size: 14px;
+  color: #C4C4C4;
+  margin: 0;
+}

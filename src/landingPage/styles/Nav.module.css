@@ -1,9 +1,12 @@
 
 .container {
-  width: 100%;
+  width: 80%;
+  height: 50px;
   display: flex;
   justify-content: space-between;
-  border: 1px solid red;
+  align-items: center;
+  position: absolute;
+  padding-left: 12px;
 }
 
 .content {

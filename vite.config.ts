@@ -9,7 +9,8 @@ export default defineConfig({
       "@landingPage": '/src/landingPage',
       "@routerApp": '/src/router',
       "@landingComponents": '/src/landingPage/components',
-      "@stylesLanding": '/src/landingPage/styles'
+      "@stylesLanding": '/src/landingPage/styles',
+      "@assets": '/src/assets'
     }
   }
 })

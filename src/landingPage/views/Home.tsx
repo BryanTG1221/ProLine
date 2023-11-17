@@ -2,12 +2,12 @@ import { NavBar } from '@landingComponents/NavBar'
 import Styles from '@stylesLanding/Home.module.css'
 
 export function HomePage () {
-  return (
+  return (  
     <main className={Styles.container}>
       <section className={Styles.section}>
         <NavBar />
-        <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="700" viewBox="0 0 1600 700" fill="none">
-          <path d="M1290.72 75.9514H24C10.7452 75.9514 0 86.6965 0 99.9514V585.879C0 599.133 10.7452 609.879 24 609.879H117.211C130.466 609.879 141.211 620.624 141.211 633.879V676C141.211 689.255 151.956 700 165.211 700H187.888H1576C1589.25 700 1600 689.255 1600 676V24C1600 10.7452 1589.25 0 1576 0H1350.35C1339.96 0 1330.76 6.67676 1327.53 16.5463L1313.53 59.4051C1310.31 69.2747 1301.1 75.9514 1290.72 75.9514Z" fill="#2E2E2E"/>
+        <svg xmlns="http://www.w3.org/2000/svg" width="1355" height="618" viewBox="0 0 1355 618" fill="none">
+          <path d="M1089.87 67H24.5C11.2452 67 0.5 77.7452 0.5 91V514C0.5 527.255 11.2452 538 24.5 538H96C109.255 538 120 548.745 120 562V593.5C120 606.755 130.745 617.5 144 617.5H159.5H1330.5C1343.75 617.5 1354.5 606.755 1354.5 593.5V24C1354.5 10.7452 1343.75 0 1330.5 0H1146.13C1135.64 0 1126.36 6.81239 1123.23 16.8219L1112.77 50.1781C1109.64 60.1876 1100.36 67 1089.87 67Z" fill="#2E2E2E"/>
         </svg>
       </section>
     </main>

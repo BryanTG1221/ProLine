@@ -1,0 +1,40 @@
+.icon-scroll,
+.icon-scroll::before {
+    transform: translateX(-50%);
+}
+
+.icon-scroll {
+  width: 20px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  border: 2px solid #000;
+  border-radius: 25px;
+  cursor: pointer;
+  bottom: 2rem;
+  padding-top: 6px;
+}
+
+.icon-scroll::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background: #000;
+  border-radius: 50%;
+  animation: 1.5s scroll cubic-bezier(0.65, -0.55, 0.25, 1.5) infinite;
+}
+
+@keyframes scroll {
+  0% {
+      opacity: 0;
+      transform: translateY(0) scale(0.5);
+  }
+  10% {
+      opacity: 1;
+      transform: scale(1);
+  }
+  100% {
+      opacity: 0;
+      transform: translateY(30px) scale(0.5);
+  }
+}

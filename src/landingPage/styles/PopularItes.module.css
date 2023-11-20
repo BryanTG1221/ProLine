@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.card {
+  width: 300px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  border-radius: 8px;
+  padding-top: 8px;
+  border: 1px solid var(--borderUI);
+}
+
+.containerImg {
+  width: 95%;
+  height: 180px;
+  border-radius: 8px;
+  background-color: grey;
+}
+
+.titleCard {
+  color: var(--textUI);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.containerInfo {
+  display: flex;
+  gap: 8px;
+  color: #434343;
+  font-size: 0.875rem;
+}
+
+.btnConfigurar {
+  width: 95%;
+  border-radius: 4px;
+  background-color: var(--primaryColor);
+  color: white;
+}
+
+.itemInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.icon {
+  color: var(--primaryColor);
+}

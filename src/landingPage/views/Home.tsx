@@ -8,15 +8,18 @@ export function HomePage () {
       <section className={Styles.section}>
         <NavBar />
         <div className={Styles.sectionInfo}>
-          <section>
+          <section className={Styles.containerTexInfo}>
             <div className={Styles.containerInfo}>
               <p className={Styles.titleBrand}>Ducati</p>
               <p className={Styles.titleModel}>Panigale V4</p>
               <p className={Styles.descriptionText}>El nuevo Panigale V4 tiene una estética de carrera y es más fácil de pilotar, lo que hace que tanto los pilotos profesionales como los aficionados se sientan cómodos en su propia batalla personal contra el cronómetro.</p>
-              <Button color='danger' type='button'>
+              <Button color="danger" type='button' style={{ width: 150, backgroundColor: '#FF3E3E', borderRadius: '8px', marginTop: '12px'}}>
                 Configurar
               </Button>
             </div>
+          </section>
+          <section className={Styles.containerMotorcycle}>
+            <img src='https://firebasestorage.googleapis.com/v0/b/proline-de53e.appspot.com/o/MotorcycleLanding.png?alt=media&token=4cc8e337-e52b-41d8-90ed-6322f44a6e32' />
           </section>
         </div>
           <svg xmlns="http://www.w3.org/2000/svg" width="1355" height="618" viewBox="0 0 1355 618" fill="none">

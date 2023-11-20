@@ -1,16 +1,38 @@
+.containerNavigator {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  gap: 12px;
+  position: absolute;
+}
 
 .container {
   width: 80%;
-  height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: absolute;
   padding-left: 12px;
+}
+
+.containerLogo {
+  width: 20%;
 }
 
 .content {
   display: flex;
   list-style: none;
   gap: 16px;
+}
+
+.containerLogo {
+  width: 16%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.logo {
+  width: 40px;
+  position: relative;
+  top: 12px;
 }

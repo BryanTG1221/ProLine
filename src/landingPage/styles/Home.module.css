@@ -27,8 +27,7 @@
 }
 
 .containerInfo {
-  width: 30%;
-  padding: 40px;
+  width: 90%;
 }
 
 .titleBrand {
@@ -50,4 +49,17 @@
   font-size: 14px;
   color: #C4C4C4;
   margin: 0;
+}
+
+.containerTexInfo {
+  width: 50%;
+  height: 50%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.containerMotorcycle {
+  width: 90%;
+  position: relative;
+  left: 52px;
 }

@@ -19,6 +19,7 @@ export interface Motorcycle {
   year: number
   cylinder: number
   speedMax: number
+  power: number
   stock: number
   price: number
   urlImage: string

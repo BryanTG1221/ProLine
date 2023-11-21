@@ -58,21 +58,28 @@ function CardMotorcycle (Moto: Motorcycle) {
   )
 }
 
-export function PopularItems (type) {
+type type = {
+  type: string
+}
+
+export function PopularItems ({ type }: type){
   if (type === 'Cars') {
     return (
-      <section>
-        <h3>Popular Items</h3>
+      <section className={Styles.container}>
+        <h1 style={{ fontSize: '1.5rem'}} >Popular Cars</h1>
         <div>
-          <CardCar/>
+          <CardCar />
         </div>
       </section>
     )
   } else {
     return (
-      <section>
-        <h3>Popular Items</h3>
-        <div>
+      <section className={Styles.container}>
+        <h1 style={{ fontSize: '1.5rem'}}>Popular Motorcycles</h1>
+        <div className={Styles.contentCards}>
+          <CardMotorcycle />
+          <CardMotorcycle />
+          <CardMotorcycle />
           <CardMotorcycle />
         </div>
       </section>

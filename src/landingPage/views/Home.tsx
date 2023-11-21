@@ -4,6 +4,7 @@ import { Mouse } from '@landingComponents/Mouse'
 import Styles from '@stylesLanding/Home.module.css'
 import { Divider } from '@nextui-org/react'
 import { PopularItems } from '@landingComponents/PopularItems'
+import { Footer } from '@landingComponents/Footer'
 
 export function HomePage () {
   return (  
@@ -14,7 +15,9 @@ export function HomePage () {
         <Divider />
         <img src={Brands} width={650} />
       </section>
-      <PopularItems />
+      <PopularItems type='Cars' />
+      <PopularItems type='Motorcycles' />
+      <Footer />
     </main>
   )
 }

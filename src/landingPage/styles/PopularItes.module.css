@@ -1,12 +1,19 @@
 .container {
+  width: 80%;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  gap: 12px;
+}
+
+.contentCards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
 }
 
 .card {
-  width: 300px;
+  width: 275px;
   height: 350px;
   display: flex;
   flex-direction: column;
@@ -54,3 +61,4 @@
 .icon {
   color: var(--primaryColor);
 }
+

@@ -1,0 +1,38 @@
+.container {
+  width: 40%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid red;
+}
+
+.containerForm {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.icon {
+  color: white;
+}
+
+.labelCheck {
+  font-size: 12px;
+}
+
+.title {
+  color: var(--textUI);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.subTitle {
+  color: var(--primaryColor);
+  font-weight: 500;
+  font-size: 1.2rem;
+  margin: 0;
+}

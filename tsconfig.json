@@ -25,7 +25,8 @@
       "@landingComponents/*": ["./src/landingPage/components/*"],
       "@routerApp/*": ["./src/router/*"],
       "@stylesLanding/*": ["./src/landingPage/styles/*"],
-      "@assets/*": ["./src/assets/*"]
+      "@assets/*": ["./src/assets/*"],
+      "@auth/*": ["./src/auth/*"]
     }
   },
   "include": ["src"],

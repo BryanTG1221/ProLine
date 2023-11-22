@@ -1,30 +1,37 @@
+import { Car, Motorcycle } from 'src/interfaces/types';
 import { Button } from '@nextui-org/react'
 import { PiHorse } from "react-icons/pi";
 import { MdSpeed } from "react-icons/md";
 import { GoGear } from "react-icons/go";
 import Styles from '@stylesLanding/PopularItes.module.css'
-import { Car, Motorcycle } from 'src/interfaces/types';
 
+type renderCar = {
+  item: Car
+}
 
-function CardCar (vehicle: Car) {
+type renderMotorcycles = {
+  item: Motorcycle
+}
+
+function CardCar ({ item }: renderCar) {
   return (
     <div className={Styles.card}>
       <div className={Styles.containerImg}>
 
       </div>
-      <p className={Styles.titleCard}>Mercedes</p>
+      <p className={Styles.titleCard}>{item.brand} {item.model}</p>
       <div className={Styles.containerInfo}>
         <p className={Styles.itemInfo}>
           <PiHorse className={Styles.icon}/> 
-          {vehicle.power} hp
+          {item.power} hp
         </p>
         <p className={Styles.itemInfo}>
           <MdSpeed className={Styles.icon}/>
-          {vehicle.speedMax} Km/h
+          {item.speedMax} Km/h
         </p>
         <p className={Styles.itemInfo}>
           <GoGear className={Styles.icon}/>
-          {vehicle.torque} Nm
+          {item.torque} Nm
         </p>
       </div>
       <Button type='button' color='primary' style={{backgroundColor: 'var(--primaryColor)', width: '95%', borderRadius: '4px'}}>Configurar</Button>
@@ -32,25 +39,25 @@ function CardCar (vehicle: Car) {
   )
 }
 
-function CardMotorcycle (Moto: Motorcycle) {
+function CardMotorcycle ({item}: renderMotorcycles) {
   return (
     <div className={Styles.card}>
       <div className={Styles.containerImg}>
 
       </div>
-      <p className={Styles.titleCard}>Mercedes</p>
+      <p className={Styles.titleCard}>{item.brand} {item.model}</p>
       <div className={Styles.containerInfo}>
         <p className={Styles.itemInfo}>
           <PiHorse className={Styles.icon}/> 
-          {Moto.cylinder} CC
+          {item.cylinder} CC
         </p>
         <p className={Styles.itemInfo}>
           <MdSpeed className={Styles.icon}/>
-          {Moto.speedMax} Km/h
+          {item.speedMax} Km/h
         </p>
         <p className={Styles.itemInfo}>
           <GoGear className={Styles.icon}/>
-          {Moto.power} CV
+          {item.power} CV
         </p>
       </div>
       <Button type='button' color='primary' style={{backgroundColor: 'var(--primaryColor)', width: '95%', borderRadius: '4px'}}>Configurar</Button>
@@ -60,15 +67,20 @@ function CardMotorcycle (Moto: Motorcycle) {
 
 type type = {
   type: string
+  item: Array<Car | Motorcycle>
 }
 
-export function PopularItems ({ type }: type){
+export function PopularItems ({ type, item }: type){
   if (type === 'Cars') {
     return (
       <section className={Styles.container}>
         <h1 style={{ fontSize: '1.5rem'}} >Popular Cars</h1>
-        <div>
-          <CardCar />
+        <div className={Styles.contentCards}>
+          {
+            item.map((car) => {
+              return <CardCar item={car} />
+            })
+          }
         </div>
       </section>
     )
@@ -77,10 +89,11 @@ export function PopularItems ({ type }: type){
       <section className={Styles.container}>
         <h1 style={{ fontSize: '1.5rem'}}>Popular Motorcycles</h1>
         <div className={Styles.contentCards}>
-          <CardMotorcycle />
-          <CardMotorcycle />
-          <CardMotorcycle />
-          <CardMotorcycle />
+          {
+            item.map((motorcycle) => {
+              return <CardMotorcycle item={motorcycle} />
+            })
+          }
         </div>
       </section>
     )

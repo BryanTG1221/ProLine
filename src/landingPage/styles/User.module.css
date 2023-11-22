@@ -6,4 +6,14 @@
   align-items: center;
   border-radius: 50%;
   border: 1px solid #F7F7F7;
+  cursor: pointer;
+}
+
+.textUser {
+  color: var(--primaryColor);
+}
+
+.textUser:hover {
+  color: white !important;
+  background-color: var(--primaryColor) !important;
 }

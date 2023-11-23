@@ -12,7 +12,8 @@ export default defineConfig({
       "@stylesLanding": '/src/landingPage/styles',
       "@assets": '/src/assets',
       "@auth": '/src/auth',
-      "@contexts": '/src/contexts'
+      "@contexts": '/src/contexts',
+      "@business": '/src/Business'
     }
   }
 })

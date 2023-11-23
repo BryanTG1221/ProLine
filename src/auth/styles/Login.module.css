@@ -1,3 +1,7 @@
+.mainContainer {
+  display: flex;
+}
+
 .container {
   width: 40%;
   height: 100vh;
@@ -5,7 +9,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid red;
 }
 
 .containerForm {
@@ -41,4 +44,85 @@
   font-weight: 400;
   font-size: 1.2rem;
   margin: 0;
+}
+
+
+.landingSide {
+  width: 60%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imageSection {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.infoSection {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  padding-top: 12px;
+  padding-left: 24px;
+}
+
+.contentImage {
+  position: relative;
+  width: 90%;
+  height: 95vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.filterImg {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #161616 0%, rgba(0, 0, 0, 0.28) 16.15%, rgba(0, 0, 0, 0.00) 81.77%, #181818 100%);
+}
+
+.title {
+  color: var(--textUI);
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.infoTitle {
+  color: white;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.description {
+  max-width: 70ch;
+  color: #B8B8B8;
+  font-size: 12px;
+}
+
+
+.poweredBy {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-right: 24px;
+  padding-bottom: 12px;
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 12px;
+  gap: 8px;
 }

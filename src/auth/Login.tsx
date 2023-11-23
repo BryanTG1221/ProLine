@@ -1,15 +1,19 @@
-import { type FormEvent } from "react";
+import { type FormEvent, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import LandingSide from '@assets/landingLogin.jpg'
 import { Input, Checkbox, Button } from "@nextui-org/react";
 import { FiArrowRight } from "react-icons/fi";
 import logo from '@assets/logo.svg'
 import logoWhiteZT from '@assets/ZTStudiosWhite.svg'
+import { UserContext } from '@contexts/User'
 import Styles from './styles/Login.module.css'
 
 export function Login () {
+  const userContextData = useContext(UserContext)
+  const navigate = useNavigate()
+
   async function handleSubmit (event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    console.log("Hola hiciste cick")  
     const form = event.currentTarget
     const formData = new FormData(form)
     const email = formData.get('email') as string
@@ -20,8 +24,9 @@ export function Login () {
       body: JSON.stringify({email,password})
     })
     const response = await fetchingData.json()
-    console.log(response)
-    
+    userContextData?.setToken(response.token)
+    userContextData?.setUser(response.user)
+    navigate('/')
   }
   return (
     <main className={Styles.mainContainer}>

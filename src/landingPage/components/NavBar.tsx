@@ -8,7 +8,8 @@ export function NavBar () {
   const userContextData = useContext(UserContext)
   const [userAuth, setAuth] = useState(false)
   useEffect(()=> {
-    !userContextData?.user ? setAuth(true) : setAuth(false)
+    console.log(userContextData)
+    userContextData?.token != "" ? setAuth(true) : setAuth(false)
   },[userContextData])
   return (
     <nav className={Styles.containerNavigator}>

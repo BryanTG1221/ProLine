@@ -78,7 +78,7 @@ export function PopularItems ({ type, item }: type){
         <div className={Styles.contentCards}>
           {
             item.map((car) => {
-              return <CardCar item={car} />
+              return <CardCar item={car} key={car.model}/>
             })
           }
         </div>
@@ -91,7 +91,7 @@ export function PopularItems ({ type, item }: type){
         <div className={Styles.contentCards}>
           {
             item.map((motorcycle) => {
-              return <CardMotorcycle item={motorcycle} />
+              return <CardMotorcycle item={motorcycle} key={motorcycle.model} />
             })
           }
         </div>

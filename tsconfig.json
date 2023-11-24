@@ -29,7 +29,8 @@
       "@auth/*": ["./src/auth/*"],
       "@contexts/*": ["./src/contexts/*"],
       "@business/*": ["./src/business/*"],
-      "@businessStyles/*": ["./src/business/styles/*"]
+      "@businessStyles/*": ["./src/business/styles/*"],
+      "@interfaces/*": ["./src/interfaces/*"]
     }
   },
   "include": ["src"],

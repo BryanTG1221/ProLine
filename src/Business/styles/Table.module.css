@@ -1,0 +1,11 @@
+.container {
+  width: 75%;
+  height: 95vh;
+  background-color: white;
+  display: flex;
+  justify-content: flex-star;
+  align-items: start;
+  border: 1px solid var(--borderUI);
+  padding: 16px 8px;
+  border-radius: 12px;
+}

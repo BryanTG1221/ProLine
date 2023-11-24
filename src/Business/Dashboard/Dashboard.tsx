@@ -1,6 +1,14 @@
+import Styles from './styles/dashboards.module.css'
 
 export function Dashboard () {
   return (
-    <p>Hola soy el dashboard</p>
+    <main className={Styles.container}>
+      <section>
+        <p>Table</p>
+      </section>
+      <section>
+        <p>Selected</p>
+      </section>
+    </main>
   )
 }

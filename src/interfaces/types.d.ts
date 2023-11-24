@@ -1,4 +1,5 @@
 export interface Car {
+  id: number
   brand: string
   model: string
   year: number
@@ -14,6 +15,7 @@ export interface Car {
 }
 
 export interface Motorcycle {
+  id: number
   brand: string
   model: string
   year: number

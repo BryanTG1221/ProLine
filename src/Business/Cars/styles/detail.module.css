@@ -1,0 +1,75 @@
+.container {
+  width: 25%;
+  height: 95vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--borderUI);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.containerTitle {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #F4F4F5;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #71717A;
+}
+
+.containerImage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.containerInfo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.btnEditar {
+  width: 100%;
+  background-color: var(--primaryColor);
+}
+
+.containerMainEmpty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.containerEmpty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+
+.emptyContainer {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #71717A;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+}
+
+.imageContent {
+  position: absolute;
+}

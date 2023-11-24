@@ -14,7 +14,8 @@ export default defineConfig({
       "@auth": '/src/auth',
       "@contexts": '/src/contexts',
       "@business": '/src/Business',
-      "@businessStyles": '/src/Business/styles'
+      "@businessStyles": '/src/Business/styles',
+      "@interfaces": '/src/interfaces'
     }
   }
 })

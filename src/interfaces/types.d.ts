@@ -26,3 +26,21 @@ export interface Motorcycle {
   price: number
   urlImage: string
 }
+
+export interface Sell {
+  id: number;
+  product_id: number;
+  purchase_date: string;
+  purchase_time: string;
+}
+
+interface Employee {
+  id: number;
+  name: string;
+  lastname: string;
+  email: string;
+  position: string;
+  department: string;
+  password_hash: string;
+}
+

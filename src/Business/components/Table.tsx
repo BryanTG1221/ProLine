@@ -1,5 +1,5 @@
 import {  Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, getKeyValue } from "@nextui-org/react"
-import { Car } from '@interfaces/types'
+import { Car, Motorcycle } from '@interfaces/types'
 import Styles from '@businessStyles/Table.module.css'
 import { useEffect } from "react"
 
@@ -10,8 +10,8 @@ type columnsStruct = {
 
 type props = {
   columnsToRender: Array<columnsStruct>
-  dataToRender: Array<Car>
-  selectCar: (row: Car) => void
+  dataToRender: Array<Car | Motorcycle>
+  selectCar: (row: Car | Motorcycle) => void | null
   defaultCar: string
 }
 

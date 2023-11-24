@@ -5,6 +5,8 @@ import { Business } from '@business/Business'
 import { Dashboard } from '@business/Dashboard/Dashboard'
 import { Cars } from '@business/Cars/Cars'
 import { Motorcycles } from '@business/Motorcycles/Motorcycles'
+import { Sells } from '@business/Sells/Sells'
+import { Users } from '@business/Users/Users'
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +32,14 @@ export const router = createBrowserRouter([
       {
         path: 'motorcycles',
         element: <Motorcycles />
+      },
+      {
+        path: 'sells',
+        element: <Sells />
+      },
+      {
+        path: 'users',
+        element: <Users />
       }
     ]
   }

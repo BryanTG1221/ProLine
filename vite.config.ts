@@ -13,7 +13,8 @@ export default defineConfig({
       "@assets": '/src/assets',
       "@auth": '/src/auth',
       "@contexts": '/src/contexts',
-      "@business": '/src/Business'
+      "@business": '/src/Business',
+      "@businessStyles": '/src/Business/styles'
     }
   }
 })

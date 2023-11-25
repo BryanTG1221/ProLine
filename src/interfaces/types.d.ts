@@ -6,7 +6,7 @@ export interface Car {
   motor: string
   traction: string
   speedMax: number
-  power: number
+  power: number 
   torque: number
   stock: number
   type: string
@@ -27,20 +27,26 @@ export interface Motorcycle {
   urlImage: string
 }
 
-export interface Sell {
+interface Sell {
   id: number;
   product_id: number;
-  purchase_date: string;
-  purchase_time: string;
+  purchase_date: string; // Assuming date is stored as string in the database
+  purchase_time: string; // Assuming time is stored as string in the database
+  brand?: string | null; // Assuming brand can be null
+  model?: string | null; // Assuming model can be null
+  year?: number | null; // Assuming year can be null
+  price?: number | null; // Assuming price can be null
 }
 
-interface Employee {
+
+interface User {
   id: number;
   name: string;
   lastname: string;
   email: string;
-  position: string;
-  department: string;
+  position?: string | null;
+  department?: string | null;
   password_hash: string;
+  is_active: boolean;
+  is_employee: boolean;
 }
-

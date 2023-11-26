@@ -16,7 +16,6 @@ type props = {
   dataToRender: Array<Sell>
 }
 
-
 export function SellsTable ({ columnsToRender, dataToRender }: props) {
   const renderCell = useCallback((sell: Sell, columnKey: Key) => {
     const cellValue = sell[columnKey as keyof Sell];

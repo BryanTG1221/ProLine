@@ -1,5 +1,5 @@
 import { DetailSelected } from '@business/components/DetailSelected'
-import { CustomTable } from '@business/components/Table'
+import { CustomTable } from '@business/components/TableCars'
 import { useEffect, useState } from 'react'
 import { Car } from '@interfaces/types'
 import Styles from '@business/Cars/styles/main.module.css'
@@ -45,7 +45,7 @@ export function Cars () {
       label: 'Price'
     },
     {
-      key: 'action',
+      key: 'actions',
       label: 'Actions'
     }
   ]

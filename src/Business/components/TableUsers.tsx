@@ -1,10 +1,9 @@
-import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell,Tooltip } from "@nextui-org/react"
-import { PriceItem } from './TableItems'
+import {  Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, Chip, Tooltip } from "@nextui-org/react"
 import { MdDeleteOutline } from "react-icons/md";
 import { AiOutlineEdit } from "react-icons/ai";
-import { Sell } from '@interfaces/types'
+import { User } from '@interfaces/types'
+import { useCallback, Key } from 'react'
 import Styles from '@businessStyles/Table.module.css'
-import { Key, useCallback } from "react"
 
 type columnsStruct = {
   key: string
@@ -13,18 +12,19 @@ type columnsStruct = {
 
 type props = {
   columnsToRender: Array<columnsStruct>
-  dataToRender: Array<Sell>
+  dataToRender: Array<User>
 }
 
-
-export function SellsTable ({ columnsToRender, dataToRender }: props) {
-  const renderCell = useCallback((sell: Sell, columnKey: Key) => {
-    const cellValue = sell[columnKey as keyof Sell];
+export function UserTable ({ columnsToRender, dataToRender }: props) {
+  const renderCell = useCallback((user: User, columnKey: Key) => {
+    const cellValue = user[columnKey as keyof User];
   
     switch (columnKey) {
-        case "price":
+      case "stock":
         return (
-          <PriceItem value={Number(cellValue)} discount={false} />
+          <Chip className="capitalize" color="danger" size="sm" variant="flat">
+            {cellValue}
+          </Chip>
         );
       case "actions":
         return (
@@ -53,12 +53,12 @@ export function SellsTable ({ columnsToRender, dataToRender }: props) {
             <TableColumn key={column.key}>{column.label}</TableColumn>
           )}
         </TableHeader>
-        <TableBody emptyContent={"No data"} items={dataToRender}>
-        {(item) => (
-          <TableRow key={item.sell_id}>
-            {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
-          </TableRow>
-        )}
+        <TableBody emptyContent={"No data"} items={dataToRender} >
+          {(item) => (
+            <TableRow key={item.user_id}>
+              {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
+            </TableRow>
+          )}
         </TableBody>
       </Table>  
     </div>

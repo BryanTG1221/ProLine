@@ -28,15 +28,11 @@ export function Sells () {
       label: "Year"
     },
     {
-      key: 'stock',
-      label: "Stock"
-    },
-    {
       key: 'price',
       label: 'Price'
     },
     {
-      key: 'action',
+      key: 'actions',
       label: 'Actions'
     }
   ]

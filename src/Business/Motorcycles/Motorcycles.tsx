@@ -1,16 +1,16 @@
 import { DetailSelected } from '@business/components/DetailSelected'
-import { CustomTable } from '@business/components/Table'
+import { CustomTable } from '@business/components/TableMotorcycles'
 import { useEffect, useState } from 'react'
-import { Car } from '@interfaces/types'
+import { Motorcycle } from '@interfaces/types'
 import Styles from '@business/Cars/styles/main.module.css'
 
 export function Motorcycles () {
-  const [motorcycles, setMotorcycles] = useState<Car[]>([])
-  const [selected, setSelected] = useState<Car | undefined>()
+  const [motorcycles, setMotorcycles] = useState<Motorcycle[]>([])
+  const [selected, setSelected] = useState<Motorcycle | undefined>()
   const [defaultKey, setDefault] = useState('')
 
-  function activeSelected (car: Car) {
-    setSelected(car)
+  function activeSelected (motorcycle: Motorcycle) {
+    setSelected(motorcycle)
   }
   
   useEffect(() => {
@@ -19,7 +19,7 @@ export function Motorcycles () {
       const data = await fetchingData.json()
       setMotorcycles(data)
       console.log(data)
-      setDefault(data[0].model)
+      setDefault(data[0].model) 
     }
     GetData()
   }, [])
@@ -45,7 +45,7 @@ export function Motorcycles () {
       label: 'Price'
     },
     {
-      key: 'action',
+      key: 'actions',
       label: 'Actions'
     }
   ]

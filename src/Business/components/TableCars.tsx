@@ -1,10 +1,10 @@
-import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell,Tooltip } from "@nextui-org/react"
-import { PriceItem } from './TableItems'
+import {  Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, Tooltip } from "@nextui-org/react"
+import { PriceItem, StockItem } from './TableItems'
 import { MdDeleteOutline } from "react-icons/md";
 import { AiOutlineEdit } from "react-icons/ai";
-import { Sell } from '@interfaces/types'
+import { Car } from '@interfaces/types'
 import Styles from '@businessStyles/Table.module.css'
-import { Key, useCallback } from "react"
+import { useEffect, Key, useCallback } from "react"
 
 type columnsStruct = {
   key: string
@@ -13,16 +13,21 @@ type columnsStruct = {
 
 type props = {
   columnsToRender: Array<columnsStruct>
-  dataToRender: Array<Sell>
+  dataToRender: Array<Car>
+  selectCar: (row: Car) => void | null
+  defaultCar: string
 }
 
-
-export function SellsTable ({ columnsToRender, dataToRender }: props) {
-  const renderCell = useCallback((sell: Sell, columnKey: Key) => {
-    const cellValue = sell[columnKey as keyof Sell];
+export function CustomTable ({ columnsToRender, dataToRender, selectCar }: props) {
+  const renderCell = useCallback((car: Car, columnKey: Key) => {
+    const cellValue = car[columnKey as keyof Car];
   
     switch (columnKey) {
-        case "price":
+      case "stock":
+        return (
+          <StockItem value={Number(cellValue)} />
+        );
+      case "price":
         return (
           <PriceItem value={Number(cellValue)} discount={false} />
         );
@@ -45,20 +50,22 @@ export function SellsTable ({ columnsToRender, dataToRender }: props) {
         return cellValue;
     }
   }, []);
+
+  useEffect(() => { selectCar(dataToRender[0]) },[dataToRender, selectCar])
   return (
-    <div className={Styles.containerTable}>
-      <Table removeWrapper aria-label="Table to render" >
+    <div className={Styles.container}>
+      <Table removeWrapper aria-label="Table to render" selectionMode="single" color="warning" defaultSelectedKeys={['1']} >
         <TableHeader columns={columnsToRender}>
           {columnsToRender.map((column) =>
             <TableColumn key={column.key}>{column.label}</TableColumn>
           )}
         </TableHeader>
         <TableBody emptyContent={"No data"} items={dataToRender}>
-        {(item) => (
-          <TableRow key={item.sell_id}>
-            {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
-          </TableRow>
-        )}
+          {(item) => (
+            <TableRow key={item.id}>
+              {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
+            </TableRow>
+          )}
         </TableBody>
       </Table>  
     </div>

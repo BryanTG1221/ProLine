@@ -28,7 +28,7 @@ export interface Motorcycle {
 }
 
 interface Sell {
-  id: number;
+  sell_id: number;
   product_id: number;
   purchase_date: string; // Assuming date is stored as string in the database
   purchase_time: string; // Assuming time is stored as string in the database
@@ -40,7 +40,7 @@ interface Sell {
 
 
 interface User {
-  id: number;
+  user_id: number;
   name: string;
   lastname: string;
   email: string;

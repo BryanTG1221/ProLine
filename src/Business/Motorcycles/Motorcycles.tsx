@@ -3,6 +3,8 @@ import { CustomTable } from '@business/components/TableMotorcycles'
 import { useEffect, useState } from 'react'
 import { Motorcycle } from '@interfaces/types'
 import Styles from '@business/Cars/styles/main.module.css'
+import { FaPlus } from 'react-icons/fa6'
+import { Button } from '@nextui-org/react'
 
 export function Motorcycles () {
   const [motorcycles, setMotorcycles] = useState<Motorcycle[]>([])
@@ -56,8 +58,13 @@ export function Motorcycles () {
   ]
   return (
     <div className={Styles.container}>
-      <CustomTable columnsToRender={columnsData} dataToRender={motorcycles} selectCar={activeSelected} defaultCar={defaultKey} syncData={handleSync} />
-      <DetailSelected item={selected} />
+      <div style={{padding: '8px'}} >
+        <Button startContent={<FaPlus />} style={{width: 'fit-content'}} variant='flat' color='success'>Add motorcycle </Button>
+      </div>
+      <section className={Styles.containerSections}>
+        <CustomTable columnsToRender={columnsData} dataToRender={motorcycles} selectCar={activeSelected} defaultCar={defaultKey} syncData={handleSync} />
+        <DetailSelected item={selected} />
+      </section>
     </div>
   )
 }

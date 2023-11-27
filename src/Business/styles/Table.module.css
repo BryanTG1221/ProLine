@@ -1,6 +1,6 @@
 .container {
   width: 75%;
-  height: 95vh;
+  height: 100%;
   background-color: white;
   display: flex;
   justify-content: flex-star;
@@ -8,11 +8,12 @@
   border: 1px solid var(--borderUI);
   padding: 16px 8px;
   border-radius: 12px;
+  overflow-y: auto;
 }
 
 .containerUser {
   width: 100%;
-  height: 95vh;
+  height: 100%;
   background-color: white;
   display: flex;
   justify-content: flex-star;

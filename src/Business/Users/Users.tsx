@@ -1,7 +1,9 @@
 import { UserTable   } from '@business/components/TableUsers'
 import Styles from '@business/Users/styles/users.module.css'
 import { User } from '@interfaces/types'
+import { Button } from '@nextui-org/react'
 import { useState, useEffect } from 'react'
+import { FaPlus } from 'react-icons/fa'
 
 export function Users () {
   const [users, setUsers] = useState<User[]>([])
@@ -49,6 +51,9 @@ export function Users () {
   ]
   return (
     <main className={Styles.container}>
+      <div className={Styles.containerBtn}>
+        <Button startContent={<FaPlus />} style={{width: 'fit-content'}} variant='flat' color='success'>Add employee </Button>
+      </div>
       <div className={Styles.containerTable}>
         <UserTable columnsToRender={columnsData} dataToRender={users} syncData={handleSync}/>
       </div>

@@ -1,7 +1,8 @@
 import { useContext } from "react";
 import { UserContext } from '@contexts/User'
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownSection, DropdownItem, Avatar, User } from "@nextui-org/react";
-import { RxDashboard } from "react-icons/rx";
+import { PiCoinLight } from "react-icons/pi";
+import { RiUser3Line } from "react-icons/ri";
 import { IoCarSportOutline, IoExitOutline  } from "react-icons/io5";
 import { TbBike } from "react-icons/tb";
 import { FiUser, FiLogIn } from "react-icons/fi";
@@ -14,7 +15,7 @@ export function UserAvatar () {
     <div className={Styles.container}>
       <Dropdown>
         <DropdownTrigger>
-          <Avatar name="Bryan" />
+          <Avatar name={userContextData?.user?.name} />
         </DropdownTrigger>
         <DropdownMenu aria-label="user">
           <DropdownSection aria-label="User Info" title='User' showDivider>
@@ -23,9 +24,18 @@ export function UserAvatar () {
             </DropdownItem>
           </DropdownSection>
           <DropdownSection aria-label="Navigation" title='Navigation' showDivider>
-            <DropdownItem aria-label="description" classNames={{base: Styles.textUser }} description='Info of bussiness' startContent={<RxDashboard style={{ fontSize: '1.2rem' }}/>}>Dashboard</DropdownItem>
-            <DropdownItem aria-label="description" classNames={{base: Styles.textUser }} description='Manage the cars of bussiness' startContent={<IoCarSportOutline style={{ fontSize: '1.2rem' }}/>}>Cars</DropdownItem>
-            <DropdownItem aria-label="description" classNames={{base: Styles.textUser }} description='Manage the motorcycles of bussiness' startContent={<TbBike style={{ fontSize: '1.2rem' }}/>}>Motorcycles</DropdownItem>
+            <DropdownItem aria-label="description" classNames={{base: Styles.textUser }} description='Manage the cars of bussiness' startContent={<IoCarSportOutline style={{ fontSize: '1.2rem' }}/>}>
+              <Link to="/admin/cars">Cars</Link>
+            </DropdownItem>
+            <DropdownItem aria-label="description" classNames={{base: Styles.textUser }} description='Manage the motorcycles of bussiness' startContent={<TbBike style={{ fontSize: '1.2rem' }}/>}>
+              <Link to="/admin/motorcycles">Motorcycles</Link>
+            </DropdownItem>
+            <DropdownItem aria-label="description" classNames={{base: Styles.textUser }} description='View the las selss of bussiness' startContent={<PiCoinLight style={{ fontSize: '1.2rem' }}/>}>
+              <Link to="/admin/sells">Sells</Link>
+            </DropdownItem>
+            <DropdownItem aria-label="description" classNames={{base: Styles.textUser }} description='View and edit the users of bussiness' startContent={<RiUser3Line style={{ fontSize: '1.2rem' }}/>}>
+              <Link to="/admin/users">Employees</Link>
+            </DropdownItem>
           </DropdownSection>
           <DropdownSection title='Exit Zone' aria-label="logout">
             <DropdownItem description='Exit of app and log out' className="text-danger" color="danger" startContent={<IoExitOutline style={{ fontSize: '1.2rem' }}/>}>Log Out</DropdownItem>

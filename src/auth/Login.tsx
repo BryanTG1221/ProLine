@@ -6,6 +6,7 @@ import { FiArrowRight } from "react-icons/fi";
 import logo from '@assets/logo.svg'
 import logoWhiteZT from '@assets/ZTStudiosWhite.svg'
 import { UserContext } from '@contexts/User'
+import toaster from 'react-hot-toast'
 import Styles from './styles/Login.module.css'
 
 export function Login () {
@@ -24,9 +25,13 @@ export function Login () {
       body: JSON.stringify({email,password})
     })
     const response = await fetchingData.json()
-    userContextData?.setToken(response.token)
-    userContextData?.setUser(response.user)
-    navigate('/')
+    if (fetchingData.status === 401) {
+      toaster.error("Las credenciales incorrectas")
+    } else {
+      userContextData?.setToken(response.token)
+      userContextData?.setUser(response.user)
+      navigate('/')
+    }
   }
   return (
     <main className={Styles.mainContainer}>

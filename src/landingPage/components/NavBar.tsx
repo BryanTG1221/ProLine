@@ -1,12 +1,16 @@
 import { useContext, useEffect, useState } from 'react'
 import { UserContext } from '@contexts/User'
 import { UserAvatar, UserToLogin } from '@landingComponents/User'
+import { useLocation } from 'react-router-dom'
 import Styles from '@stylesLanding/Nav.module.css'
 import Proline from '@assets/logo.svg'
+import { Link } from 'react-router-dom'
 
 export function NavBar () {
   const userContextData = useContext(UserContext)
   const [userAuth, setAuth] = useState(false)
+  const location = useLocation()
+  console.log(location)
   useEffect(()=> {
     console.log(userContextData)
     userContextData?.token != "" ? setAuth(true) : setAuth(false)
@@ -16,9 +20,15 @@ export function NavBar () {
       <section className={Styles.container}>
         <img src={Proline} width={120}/>
         <ul className={Styles.content}>
-          <li>Home</li>
-          <li>Cars</li>
-          <li>Motorcycles</li>
+          <li>
+            <Link style={location.pathname === "/" ? {color: 'var(--primaryColor)'} : {color: '#434343'}} to="/">Home</Link>
+            </li>
+          <li>
+            <Link style={location.pathname === "/cars" ? {color: 'var(--primaryColor)'} : {color: '#434343'}} to="/cars">Cars</Link>
+          </li>
+          <li>
+            <Link style={location.pathname === "/motorcycles" ? {color: 'var(--primaryColor)'} : {color: '#434343'}} to="/motorcycles">Motorcycles</Link>
+          </li>
         </ul>
         {
           userAuth ? (<UserAvatar />) : (<UserToLogin />)

@@ -15,7 +15,7 @@ export function Cars () {
 
   useEffect(() => {
     async function GetData () {
-      const fetchingData = await fetch('http://127.0.0.1:5000/api/vehicles')
+      const fetchingData = await fetch('http://127.0.0.1:5000/api/vehicles/')
       const data = await fetchingData.json()
       setCars(data)
       console.log(data)

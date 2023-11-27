@@ -7,7 +7,7 @@ export function Sells () {
   const [sells, setSells] = useState<Sell[]>([])
   useEffect(() => {
     async function getSells () {
-      const fetchingData = await fetch('http://127.0.0.1:5000/api/sells')
+      const fetchingData = await fetch('http://127.0.0.1:5000/api/sells/')
       const data = await fetchingData.json()
       setSells(data.sells)
     } 
@@ -30,10 +30,6 @@ export function Sells () {
     {
       key: 'price',
       label: 'Price'
-    },
-    {
-      key: 'actions',
-      label: 'Actions'
     }
   ]
   return (

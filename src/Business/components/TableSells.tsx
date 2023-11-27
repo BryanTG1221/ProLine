@@ -1,10 +1,8 @@
-import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell,Tooltip, Button } from "@nextui-org/react"
-import { ModalToDelete } from '@business/components/Modals'
+import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell} from "@nextui-org/react"
 import { PriceItem } from './TableItems'
-import { MdDeleteOutline } from "react-icons/md";
 import { Sell } from '@interfaces/types'
 import Styles from '@businessStyles/Table.module.css'
-import { Key, useCallback, useState } from "react"
+import { Key, useCallback } from "react"
 
 type columnsStruct = {
   key: string
@@ -17,16 +15,8 @@ type props = {
 }
 
 export function SellsTable ({ columnsToRender, dataToRender }: props) {
-  const [activeModalDelete, setActiveModalDelete] = useState(false)
-
-  function onOpenModalDelete () {
-    setActiveModalDelete(!activeModalDelete)
-  }
 
   const renderCell = useCallback((sell: Sell, columnKey: Key) => {
-    function onOpenModalDelete () {
-      setActiveModalDelete(!activeModalDelete)
-    }
     const cellValue = sell[columnKey as keyof Sell];
   
     switch (columnKey) {
@@ -41,23 +31,12 @@ export function SellsTable ({ columnsToRender, dataToRender }: props) {
         return (
           <PriceItem value={Number(cellValue)} discount={false} />
         );
-      case "actions":
-        return (
-          <div className="relative flex items-center gap-2">
-            <Tooltip color="danger" content="Delete user">
-              <Button variant="light" color="danger" isIconOnly onPress={onOpenModalDelete}>
-                <MdDeleteOutline className={Styles.iconDelete} />
-              </Button>
-            </Tooltip>
-          </div>
-        );
       default:
         return cellValue;
     }
-  }, [activeModalDelete]);
+  }, []);
   return (
     <div className={Styles.containerTable}>
-      <ModalToDelete isOpen={activeModalDelete} onOpen={onOpenModalDelete} />
       <Table removeWrapper aria-label="Table to render" >
         <TableHeader columns={columnsToRender}>
           {columnsToRender.map((column) =>

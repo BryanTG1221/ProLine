@@ -11,7 +11,6 @@ export function Users () {
       const fetchingData = await fetch('http://127.0.0.1:5000/api/users/employees')
       const data = await fetchingData.json()
       setUsers(data.employees)
-      console.log(data)
     }
     GetData()
   }, [])

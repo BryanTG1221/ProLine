@@ -31,6 +31,12 @@
   font-size: 1.1rem;
 }
 
+.containerForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .containerBrand {
   display: flex;
   flex-direction: column;

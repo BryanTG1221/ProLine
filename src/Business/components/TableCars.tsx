@@ -60,12 +60,12 @@ export function CustomTable ({ columnsToRender, dataToRender, selectCar }: props
       case "actions":
         return (
           <div className="flex">
-            <Tooltip content="Edit user">
+            <Tooltip content="Edit car">
               <Button isIconOnly variant="light" color="default" onPress={onOpenModal} onClick={() => setCarToEdit(car)}>
                 <AiOutlineEdit className={Styles.iconEdit} />
               </Button>
             </Tooltip>
-            <Tooltip color="danger" content="Delete user">
+            <Tooltip color="danger" content="Delete car">
               <Button variant="light" color="danger" isIconOnly onPress={onOpenModalDelete}>
                 <MdDeleteOutline className={Styles.iconDelete} />
               </Button>

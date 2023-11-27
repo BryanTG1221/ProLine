@@ -1,8 +1,9 @@
-import {  Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, Chip, Tooltip } from "@nextui-org/react"
+import {  Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, Chip, Tooltip, Button } from "@nextui-org/react"
+import { ModalUsers, ModalToDelete } from '@business/components/Modals'
 import { MdDeleteOutline } from "react-icons/md";
 import { AiOutlineEdit } from "react-icons/ai";
 import { User } from '@interfaces/types'
-import { useCallback, Key } from 'react'
+import { useCallback, Key, useState } from 'react'
 import Styles from '@businessStyles/Table.module.css'
 
 type columnsStruct = {
@@ -16,7 +17,25 @@ type props = {
 }
 
 export function UserTable ({ columnsToRender, dataToRender }: props) {
+  const [activeModal, setActiveModal] = useState(false)
+  const [activeModalDelete, setActiveModalDelete] = useState(false)
+  const [userToEdit, setUserToEdit] = useState<User>()
+
+  function onOpenModalDelete () {
+    setActiveModalDelete(!activeModalDelete)
+  }
+  function onOpenModal () {
+    setActiveModal(!activeModal)
+  }
+
   const renderCell = useCallback((user: User, columnKey: Key) => {
+
+    function onOpenModalDelete () {
+      setActiveModalDelete(!activeModalDelete)
+    }
+    function onOpenModal () {
+      setActiveModal(!activeModal)
+    }
     const cellValue = user[columnKey as keyof User];
   
     switch (columnKey) {
@@ -30,23 +49,25 @@ export function UserTable ({ columnsToRender, dataToRender }: props) {
         return (
           <div className="relative flex items-center gap-2">
             <Tooltip content="Edit user">
-              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+              <Button isIconOnly color="default" variant="light" onPress={onOpenModal} onClick={() => setUserToEdit(user)}>
                 <AiOutlineEdit className={Styles.icon} />
-              </span>
+              </Button>
             </Tooltip>
             <Tooltip color="danger" content="Delete user">
-              <span className="text-lg text-danger cursor-pointer active:opacity-50">
+              <Button isIconOnly color="danger" variant="light" onPress={onOpenModalDelete} onClick={() => setUserToEdit(user)}>
                 <MdDeleteOutline className={Styles.icon} />
-              </span>
+              </Button>
             </Tooltip>
           </div>
         );
       default:
         return cellValue;
     }
-  }, []);
+  }, [activeModal, activeModalDelete]);
   return (
     <div className={Styles.containerTable}>
+      <ModalUsers isOpen={activeModal} onOpen={onOpenModal} item={userToEdit} />
+      <ModalToDelete isOpen={activeModalDelete} onOpen={onOpenModalDelete} />
       <Table removeWrapper aria-label="Table to render" >
         <TableHeader columns={columnsToRender}>
           {columnsToRender.map((column) =>

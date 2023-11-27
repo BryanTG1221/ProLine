@@ -1,7 +1,7 @@
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, UseDisclosureProps, Button, Input, Select, SelectItem } from '@nextui-org/react'
 import { useEffect, useState, ChangeEvent } from 'react'
 import { Car, Motorcycle, User } from '@interfaces/types'
-import Style from '@businessStyles/Table.module.css'
+import Styles from '@businessStyles/modals.module.css'
 
 
 type Props = {
@@ -307,3 +307,73 @@ export function ModalToDelete({ isOpen, onOpen, item, type, user, syncData }: Us
   );
 }
 
+
+export function ModalAdd ({ isOpen, onOpen, syncData }: UseDisclosureProps & UserProps) {
+  const [brands, setBrands] = useState<Brands[]>()
+
+  async function getBrands() {
+    const fetchData = await fetch('http://127.0.0.1:5000/api/brands/cars');
+    const data = await fetchData.json();
+    setBrands(data.car_brands);
+  }
+
+  useEffect(() => {
+    getBrands();
+  }, []);
+
+  function handleAdd () {
+    console.log("Crando")
+    // syncData()
+  }
+
+  return (
+    <Modal isOpen={isOpen} onOpenChange={onOpen} size='5xl'>
+      <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">Add car</ModalHeader>
+              <ModalBody>
+                <section className={Styles.containerForm}>
+                  <div style={{display: 'flex', width: '50%', gap: '12px'}}>
+                    <Select items={brands} label="Brand" size='sm'>
+                      {(brand) => <SelectItem key={brand.name}>{brand.name}</SelectItem>}
+                    </Select>
+                    <Input label="Model" size='sm' />
+                  </div>
+                  <div className={Styles.containerRow}>
+                    <Input label="Engine" size='sm' />
+                    <Select label="Traction"size='sm' >
+                      <SelectItem key={'front'}>Front</SelectItem>
+                      <SelectItem key={'back'}>Back</SelectItem>
+                      <SelectItem key={'total'}>Total</SelectItem>
+                    </Select>
+                    <Input label="Speed max" size='sm' type='number' />
+                    <Input label="Power" size='sm' type='number' />
+                    <Select label="Type"size='sm' >
+                      <SelectItem key={'combustion'}>Combustion</SelectItem>
+                      <SelectItem key={'electric'}>Electric</SelectItem>
+                    </Select>
+                  </div>
+                  <div className={Styles.containerRow}>
+                    <Input label="Year" size='sm' type='number' />
+                    <Input label="Stock" size='sm' type='number' />
+                  </div>
+                  <div className={Styles.containerRow}>
+                    <Input label="Price" size='sm' type='number' />
+                  </div>
+                </section>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="default" variant="light" onPress={onClose}>
+                  Cancel
+                </Button>
+                <Button color="success" variant='solid' style={{color:'white'}}  onPress={handleAdd}>
+                  Add
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+      </ModalContent>
+    </Modal>
+  )
+}

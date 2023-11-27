@@ -1,3 +1,4 @@
+import { ModalAddUser } from '@business/components/Modals'
 import { UserTable   } from '@business/components/TableUsers'
 import Styles from '@business/Users/styles/users.module.css'
 import { User } from '@interfaces/types'
@@ -7,6 +8,7 @@ import { FaPlus } from 'react-icons/fa'
 
 export function Users () {
   const [users, setUsers] = useState<User[]>([])
+  const [modalAdd, setModalAdd] = useState(false)
   const [sync, setSync] = useState(true)
 
   function handleSync() {
@@ -22,6 +24,10 @@ export function Users () {
     }
     GetData()
   }, [sync])
+
+  function handleModal () {
+    setModalAdd(!modalAdd)
+  }
 
   const columnsData = [
     {
@@ -51,8 +57,9 @@ export function Users () {
   ]
   return (
     <main className={Styles.container}>
+      <ModalAddUser isOpen={modalAdd} syncData={handleSync} onOpen={handleModal} item={undefined} />
       <div className={Styles.containerBtn}>
-        <Button startContent={<FaPlus />} style={{width: 'fit-content'}} variant='flat' color='success'>Add employee </Button>
+        <Button startContent={<FaPlus />} style={{width: 'fit-content'}} variant='flat' color='success' onPress={handleModal}>Add employee </Button>
       </div>
       <div className={Styles.containerTable}>
         <UserTable columnsToRender={columnsData} dataToRender={users} syncData={handleSync}/>

@@ -11,7 +11,7 @@ type Props = {
 
 type UserProps = {
   item: User | undefined,
-  syncData: () => void
+  syncData: () => void,
 }
 
 type Brands = {
@@ -72,7 +72,7 @@ export function ModalCar({ isOpen, onOpen, item, syncData }: UseDisclosureProps 
             <>
               <ModalHeader className="flex flex-col gap-1">Editar</ModalHeader>
               <ModalBody>
-                <form className={Style.containerBrand}>
+                <form className={Styles.containerBrand}>
                   <Select label="Select a brand" variant='faded' items={brands} defaultSelectedKeys={formData.brand ? formData.brand : item?.brand} onChange={(event) => handleInputChange(event)} name="brand">
                     {(brand) => <SelectItem key={brand.name}>{brand.name}</SelectItem>}
                   </Select>
@@ -145,7 +145,7 @@ export function ModalMotorcycle({ isOpen, onOpen, item, syncData }: UseDisclosur
             <>
               <ModalHeader className="flex flex-col gap-1">Editar</ModalHeader>
               <ModalBody>
-                <form className={Style.containerBrand}>
+                <form className={Styles.containerBrand}>
                   <Select label="Select a brand" variant='faded' items={brands} defaultSelectedKeys={formData.brand ? formData.brand : item?.brand} onChange={(event) => handleInputChange(event)} name="brand">
                     {(brand) => <SelectItem key={brand.name}>{brand.name}</SelectItem>}
                   </Select>
@@ -307,9 +307,30 @@ export function ModalToDelete({ isOpen, onOpen, item, type, user, syncData }: Us
   );
 }
 
-
-export function ModalAdd ({ isOpen, onOpen, syncData }: UseDisclosureProps & UserProps) {
+export function ModalAddCar ({ isOpen, onOpen, syncData }: UseDisclosureProps & UserProps) {
   const [brands, setBrands] = useState<Brands[]>()
+  const [formData, setFormData] = useState<Car>({
+    id: 0,
+    brand: '',
+    model: '',
+    motor: '',
+    traction: '',
+    speedMax: 0,
+    power: 0,
+    type: '',
+    year: 0,
+    stock: 0,
+    price: 0,
+    torque: 0,
+    urlImage: ''
+  });
+
+  function handleInputChange(event: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>, fieldName: string) {
+    setFormData({
+      ...formData,
+      [fieldName]: event.target.value,
+    });
+  }
 
   async function getBrands() {
     const fetchData = await fetch('http://127.0.0.1:5000/api/brands/cars');
@@ -321,9 +342,15 @@ export function ModalAdd ({ isOpen, onOpen, syncData }: UseDisclosureProps & Use
     getBrands();
   }, []);
 
-  function handleAdd () {
-    console.log("Crando")
-    // syncData()
+  async function handleAdd () {
+    const fetchingData = await fetch('http://127.0.0.1:5000/api/vehicles/', { 
+      method: 'POST',
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(formData)
+     })
+     const repsonse = await fetchingData.json()
+     console.log(repsonse)
+    syncData()
   }
 
   return (
@@ -335,31 +362,185 @@ export function ModalAdd ({ isOpen, onOpen, syncData }: UseDisclosureProps & Use
               <ModalBody>
                 <section className={Styles.containerForm}>
                   <div style={{display: 'flex', width: '50%', gap: '12px'}}>
-                    <Select items={brands} label="Brand" size='sm'>
+                    <Select items={brands} label="Brand" size='sm' onChange={(e) => handleInputChange(e, 'brand')} value={formData.brand} >
                       {(brand) => <SelectItem key={brand.name}>{brand.name}</SelectItem>}
                     </Select>
-                    <Input label="Model" size='sm' />
+                    <Input label="Model" size='sm' onChange={(e) => handleInputChange(e, 'model')} value={formData.model}/>
                   </div>
                   <div className={Styles.containerRow}>
-                    <Input label="Engine" size='sm' />
-                    <Select label="Traction"size='sm' >
+                    <Input label="Engine" size='sm' onChange={(e) => handleInputChange(e, 'motor')} value={formData.motor} />
+                    <Select label="Traction"size='sm' onChange={(e) => handleInputChange(e, 'traction')} value={formData.traction} >
                       <SelectItem key={'front'}>Front</SelectItem>
                       <SelectItem key={'back'}>Back</SelectItem>
                       <SelectItem key={'total'}>Total</SelectItem>
                     </Select>
-                    <Input label="Speed max" size='sm' type='number' />
-                    <Input label="Power" size='sm' type='number' />
-                    <Select label="Type"size='sm' >
+                    <Input label="Speed max" size='sm' type='number' onChange={(e) => handleInputChange(e, 'speedMax')} value={String(formData.speedMax)} />
+                    <Input label="Power" size='sm' type='number' onChange={(e) => handleInputChange(e, 'power')} value={String(formData.power)}/>
+                    <Input label="Torque" size='sm' type='number' onChange={(e) => handleInputChange(e, 'torque')} value={String(formData.torque)}/>
+                    <Select label="Type"size='sm' onChange={(e) => handleInputChange(e, 'type')} value={formData.type}>
                       <SelectItem key={'combustion'}>Combustion</SelectItem>
                       <SelectItem key={'electric'}>Electric</SelectItem>
                     </Select>
                   </div>
                   <div className={Styles.containerRow}>
-                    <Input label="Year" size='sm' type='number' />
-                    <Input label="Stock" size='sm' type='number' />
+                    <Input label="Year" size='sm' type='number' onChange={(e) => handleInputChange(e, 'year')} value={String(formData.year)} />
+                    <Input label="Stock" size='sm' type='number' onChange={(e) => handleInputChange(e, 'stock')} value={String(formData.stock)} />
                   </div>
                   <div className={Styles.containerRow}>
-                    <Input label="Price" size='sm' type='number' />
+                    <Input label="Price" size='sm' type='number' onChange={(e) => handleInputChange(e, 'price')} value={String(formData.price)} />
+                  </div>
+                </section>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="default" variant="light" onPress={onClose}>
+                  Cancel
+                </Button>
+                <Button color="success" variant='solid' style={{color:'white'}}  onPress={handleAdd}>
+                  Add
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+      </ModalContent>
+    </Modal>
+  )
+}
+
+export function ModalAddMotorcycles ({ isOpen, onOpen, syncData }: UseDisclosureProps & UserProps) {
+  const [brands, setBrands] = useState<Brands[]>()
+  const [formData, setFormData] = useState<Motorcycle>({
+    id: 0,
+    brand: '',
+    model: '',
+    cylinder: 0,
+    speedMax: 0,
+    power: 0,
+    year: 0,
+    stock: 0,
+    price: 0,
+    urlImage: ''
+  });
+
+  function handleInputChange(event: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>, fieldName: string) {
+    setFormData({
+      ...formData,
+      [fieldName]: event.target.value,
+    });
+  }
+
+  async function getBrands() {
+    const fetchData = await fetch('http://127.0.0.1:5000/api/brands/motorcycles');
+    const data = await fetchData.json();
+    setBrands(data.motorcycle_brands);
+  }
+
+  useEffect(() => {
+    getBrands();
+  }, []);
+
+  async function handleAdd () {
+    const fetchingData = await fetch('http://127.0.0.1:5000/api/motorcycles/', { 
+      method: 'POST',
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(formData)
+     })
+     const repsonse = await fetchingData.json()
+     console.log(repsonse)
+    syncData()
+  }
+
+  return (
+    <Modal isOpen={isOpen} onOpenChange={onOpen} size='5xl'>
+      <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">Add car</ModalHeader>
+              <ModalBody>
+                <section className={Styles.containerForm}>
+                  <div style={{display: 'flex', width: '50%', gap: '12px'}}>
+                    <Select items={brands} label="Brand" size='sm' onChange={(e) => handleInputChange(e, 'brand')} value={formData.brand} >
+                      {(brand) => <SelectItem key={brand.name}>{brand.name}</SelectItem>}
+                    </Select>
+                    <Input label="Model" size='sm' onChange={(e) => handleInputChange(e, 'model')} value={formData.model}/>
+                  </div>
+                  <div className={Styles.containerRow}>
+                    <Input label="Speed max" size='sm' type='number' onChange={(e) => handleInputChange(e, 'speedMax')} value={String(formData.speedMax)} />
+                    <Input label="Power" size='sm' type='number' onChange={(e) => handleInputChange(e, 'power')} value={String(formData.power)}/>
+                  </div>
+                  <div className={Styles.containerRow}>
+                    <Input label="Year" size='sm' type='number' onChange={(e) => handleInputChange(e, 'year')} value={String(formData.year)} />
+                    <Input label="Stock" size='sm' type='number' onChange={(e) => handleInputChange(e, 'stock')} value={String(formData.stock)} />
+                  </div>
+                  <div className={Styles.containerRow}>
+                    <Input label="Price" size='sm' type='number' onChange={(e) => handleInputChange(e, 'price')} value={String(formData.price)} />
+                  </div>
+                </section>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="default" variant="light" onPress={onClose}>
+                  Cancel
+                </Button>
+                <Button color="success" variant='solid' style={{color:'white'}}  onPress={handleAdd}>
+                  Add
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+      </ModalContent>
+    </Modal>
+  )
+}
+
+export function ModalAddUser ({ isOpen, onOpen, syncData }: UseDisclosureProps & UserProps) {
+  const [formData, setFormData] = useState<User>({
+    email: '',
+    is_active: true,
+    is_employee: true,
+    lastname: '',
+    name: '',
+    password_hash: '',
+    user_id: 0,
+    department: '',
+    position: ''
+  });
+
+  function handleInputChange(event: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>, fieldName: string) {
+    setFormData({
+      ...formData,
+      [fieldName]: event.target.value,
+    });
+  }
+
+  async function handleAdd () {
+    const fetchingData = await fetch('http://127.0.0.1:5000/api/users/add', { 
+      method: 'POST',
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(formData)
+     })
+     const repsonse = await fetchingData.json()
+     console.log(repsonse)
+    syncData()
+  }
+
+  return (
+    <Modal isOpen={isOpen} onOpenChange={onOpen} size='5xl'>
+      <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">Add car</ModalHeader>
+              <ModalBody>
+                <section className={Styles.containerForm}>
+                  <div style={{display: 'flex', width: '50%', gap: '12px'}}>
+                    <Input label="Name" size='sm' onChange={(e) => handleInputChange(e, 'name')} value={formData.name}/>
+                    <Input label="Lastname" size='sm' onChange={(e) => handleInputChange(e, 'lastname')} value={formData.lastname}/>
+                  </div>
+                  <div className={Styles.containerRow}>
+                    <Input label="Position" size='sm' type='string' onChange={(e) => handleInputChange(e, 'position')} value={String(formData.position)} />
+                    <Input label="Department" size='sm' type='string' onChange={(e) => handleInputChange(e, 'department')} value={String(formData.department)}/>
+                  </div>
+                  <div className={Styles.containerRow}>
+                    <Input label="Email" size='sm' type='string' onChange={(e) => handleInputChange(e, 'email')} value={formData.email} />
+                    <Input label="Password" size='sm' type='string' onChange={(e) => handleInputChange(e, 'password_hash')} value={formData.password_hash} />
                   </div>
                 </section>
               </ModalBody>

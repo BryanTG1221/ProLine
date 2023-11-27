@@ -1,5 +1,6 @@
-import { useEffect, Key, useCallback } from "react"
-import {  Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, Tooltip } from "@nextui-org/react"
+import { useEffect, Key, useCallback , useState} from "react"
+import {  Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, Tooltip, Button } from "@nextui-org/react"
+import { ModalMotorcycle, ModalToDelete } from '@business/components/Modals'
 import { PriceItem, StockItem } from './TableItems'
 import { MdDeleteOutline } from "react-icons/md";
 import { AiOutlineEdit } from "react-icons/ai";
@@ -19,10 +20,35 @@ type props = {
 }
 
 export function CustomTable ({ columnsToRender, dataToRender, selectCar }: props) {
+  const [activeModal, setActiveModal] = useState(false)
+  const [activeModalDelete, setActiveModalDelete] = useState(false)
+  const [motorcycleToEdit, setMotorcycleToEdit] = useState<Motorcycle>()
+
+  function onOpenModalDelete () {
+    setActiveModalDelete(!activeModalDelete)
+  }
+  function onOpenModal () {
+    setActiveModal(!activeModal)
+  }
+
   const renderCell = useCallback((motorcycles: Motorcycle, columnKey: Key) => {
+    function onOpenModal () {
+      setActiveModal(!activeModal)
+    }
+    function onOpenModalDelete () {
+      setActiveModalDelete(!activeModalDelete)
+    }
+
     const cellValue = motorcycles[columnKey as keyof Motorcycle];
   
     switch (columnKey) {
+      case "model":
+        return (
+          <div className={Styles.containerBrand}>
+            <p className={Styles.title}>{cellValue}</p>
+            <p className={Styles.brand}>{motorcycles.brand}</p>
+          </div>
+        );
       case "stock":
         return (
           <StockItem value={Number(cellValue)} />
@@ -34,26 +60,30 @@ export function CustomTable ({ columnsToRender, dataToRender, selectCar }: props
       case "actions":
         return (
           <div className="relative flex items-center gap-2">
-            <Tooltip content="Edit user">
-              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                <AiOutlineEdit className={Styles.icon} />
-              </span>
+            <Tooltip content="Edit motorcycles">
+              <Button variant="light" isIconOnly onPress={onOpenModal} onClick={() => setMotorcycleToEdit(motorcycles)}>
+                <AiOutlineEdit className={Styles.iconEdit} />
+              </Button>
             </Tooltip>
-            <Tooltip color="danger" content="Delete user">
-              <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                <MdDeleteOutline className={Styles.icon} />
-              </span>
+            <Tooltip color="danger" content="Delete motorcycle">
+              <Button variant="light" isIconOnly color="danger" onPress={onOpenModalDelete}>
+                <MdDeleteOutline className={Styles.iconDelete} />
+              </Button>
             </Tooltip>
           </div>
         );
       default:
         return cellValue;
     }
-  }, []);
+  }, [activeModal, activeModalDelete]);
+
+  console.log(motorcycleToEdit)
 
   useEffect(() => { selectCar(dataToRender[0]) },[dataToRender, selectCar])
   return (
     <div className={Styles.container}>
+      <ModalMotorcycle isOpen={activeModal} onOpen={onOpenModal} item={motorcycleToEdit}/>
+      <ModalToDelete isOpen={activeModalDelete} onOpen={onOpenModalDelete} />
       <Table removeWrapper aria-label="Table to render" selectionMode="single" color="warning" defaultSelectedKeys={['1']} >
         <TableHeader columns={columnsToRender}>
           {columnsToRender.map((column) =>

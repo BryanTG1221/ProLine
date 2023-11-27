@@ -1,10 +1,10 @@
-import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell,Tooltip } from "@nextui-org/react"
+import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell,Tooltip, Button } from "@nextui-org/react"
+import { ModalToDelete } from '@business/components/Modals'
 import { PriceItem } from './TableItems'
 import { MdDeleteOutline } from "react-icons/md";
-import { AiOutlineEdit } from "react-icons/ai";
 import { Sell } from '@interfaces/types'
 import Styles from '@businessStyles/Table.module.css'
-import { Key, useCallback } from "react"
+import { Key, useCallback, useState } from "react"
 
 type columnsStruct = {
   key: string
@@ -17,10 +17,26 @@ type props = {
 }
 
 export function SellsTable ({ columnsToRender, dataToRender }: props) {
+  const [activeModalDelete, setActiveModalDelete] = useState(false)
+
+  function onOpenModalDelete () {
+    setActiveModalDelete(!activeModalDelete)
+  }
+
   const renderCell = useCallback((sell: Sell, columnKey: Key) => {
+    function onOpenModalDelete () {
+      setActiveModalDelete(!activeModalDelete)
+    }
     const cellValue = sell[columnKey as keyof Sell];
   
     switch (columnKey) {
+      case "model":
+        return (
+          <div className={Styles.containerBrand}>
+            <p className={Styles.title}>{cellValue}</p>
+            <p className={Styles.brand}>{sell.brand}</p>
+          </div>
+        );
         case "price":
         return (
           <PriceItem value={Number(cellValue)} discount={false} />
@@ -28,24 +44,20 @@ export function SellsTable ({ columnsToRender, dataToRender }: props) {
       case "actions":
         return (
           <div className="relative flex items-center gap-2">
-            <Tooltip content="Edit user">
-              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                <AiOutlineEdit className={Styles.icon} />
-              </span>
-            </Tooltip>
             <Tooltip color="danger" content="Delete user">
-              <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                <MdDeleteOutline className={Styles.icon} />
-              </span>
+              <Button variant="light" color="danger" isIconOnly onPress={onOpenModalDelete}>
+                <MdDeleteOutline className={Styles.iconDelete} />
+              </Button>
             </Tooltip>
           </div>
         );
       default:
         return cellValue;
     }
-  }, []);
+  }, [activeModalDelete]);
   return (
     <div className={Styles.containerTable}>
+      <ModalToDelete isOpen={activeModalDelete} onOpen={onOpenModalDelete} />
       <Table removeWrapper aria-label="Table to render" >
         <TableHeader columns={columnsToRender}>
           {columnsToRender.map((column) =>

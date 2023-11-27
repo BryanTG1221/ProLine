@@ -22,6 +22,28 @@
   border-radius: 12px;
 }
 
-.icon {
-  font-size: 1rem;
+.iconEdit {
+  font-size: 1.1rem;
+  color: #A1A1AA;
+}
+
+.iconDelete {
+  font-size: 1.1rem;
+}
+
+.containerBrand {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  line-height: 12px;
+}
+
+.title {
+  margin: 0;
+  font-weight: 500;
+}
+
+.brand {
+  font-size: 12px;
+  margin: 0;
 }

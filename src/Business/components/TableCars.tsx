@@ -82,7 +82,7 @@ export function CustomTable ({ columnsToRender, dataToRender, selectCar, syncDat
   return (
     <div className={Styles.container}>
       <ModalCar isOpen={activeModal} onOpen={onOpenModal} item={carToEdit} syncData={syncData} />
-      <ModalToDelete isOpen={activeModalDelete} onOpen={onOpenModalDelete} item={carToEdit} type={"Car"} user={undefined}/>
+      <ModalToDelete isOpen={activeModalDelete} onOpen={onOpenModalDelete} item={carToEdit} type={"Car"} user={undefined} syncData={syncData} />
       <Table removeWrapper aria-label="Table to render" selectionMode="single" color="warning" defaultSelectedKeys={['1']} >
         <TableHeader columns={columnsToRender}>
           {columnsToRender.map((column) =>

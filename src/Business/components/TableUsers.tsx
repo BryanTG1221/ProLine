@@ -68,7 +68,7 @@ export function UserTable ({ columnsToRender, dataToRender, syncData }: props) {
   return (
     <div className={Styles.containerTable}>
       <ModalUsers isOpen={activeModal} onOpen={onOpenModal} item={userToEdit} syncData={syncData}/>
-      <ModalToDelete isOpen={activeModalDelete} onOpen={onOpenModalDelete} user={userToEdit} type={"User"} item={undefined}  />
+      <ModalToDelete isOpen={activeModalDelete} onOpen={onOpenModalDelete} user={userToEdit} type={"User"} item={undefined} syncData={syncData}  />
       <Table removeWrapper aria-label="Table to render" >
         <TableHeader columns={columnsToRender}>
           {columnsToRender.map((column) =>

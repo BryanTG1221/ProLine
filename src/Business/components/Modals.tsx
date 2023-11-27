@@ -244,9 +244,10 @@ type UserToDelete = {
   item: Motorcycle | Car | undefined,
   user: User | undefined
   type: string
+  syncData: () => void
 }
 
-export function ModalToDelete({ isOpen, onOpen, item, type, user }: UseDisclosureProps & UserToDelete) {
+export function ModalToDelete({ isOpen, onOpen, item, type, user, syncData }: UseDisclosureProps & UserToDelete) {
   const getDeleteEndpoint = () => {
     switch (type) {
       case 'Car':
@@ -269,6 +270,7 @@ export function ModalToDelete({ isOpen, onOpen, item, type, user }: UseDisclosur
 
       if (response.ok) {
         onOpen();
+        syncData()
       } else {
         console.error('Error al eliminar el elemento');
       }

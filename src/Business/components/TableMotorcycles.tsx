@@ -17,9 +17,10 @@ type props = {
   dataToRender: Array<Motorcycle>
   selectCar: (row: Motorcycle) => void | null
   defaultCar: string
+  syncData: () => void
 }
 
-export function CustomTable ({ columnsToRender, dataToRender, selectCar }: props) {
+export function CustomTable ({ columnsToRender, dataToRender, selectCar, syncData }: props) {
   const [activeModal, setActiveModal] = useState(false)
   const [activeModalDelete, setActiveModalDelete] = useState(false)
   const [motorcycleToEdit, setMotorcycleToEdit] = useState<Motorcycle>()
@@ -66,7 +67,7 @@ export function CustomTable ({ columnsToRender, dataToRender, selectCar }: props
               </Button>
             </Tooltip>
             <Tooltip color="danger" content="Delete motorcycle">
-              <Button variant="light" isIconOnly color="danger" onPress={onOpenModalDelete}>
+              <Button variant="light" isIconOnly color="danger" onPress={onOpenModalDelete} onClick={() => setMotorcycleToEdit(motorcycles)}>
                 <MdDeleteOutline className={Styles.iconDelete} />
               </Button>
             </Tooltip>
@@ -77,13 +78,11 @@ export function CustomTable ({ columnsToRender, dataToRender, selectCar }: props
     }
   }, [activeModal, activeModalDelete]);
 
-  console.log(motorcycleToEdit)
-
   useEffect(() => { selectCar(dataToRender[0]) },[dataToRender, selectCar])
   return (
     <div className={Styles.container}>
-      <ModalMotorcycle isOpen={activeModal} onOpen={onOpenModal} item={motorcycleToEdit}/>
-      <ModalToDelete isOpen={activeModalDelete} onOpen={onOpenModalDelete} />
+      <ModalMotorcycle isOpen={activeModal} onOpen={onOpenModal} item={motorcycleToEdit} syncData={syncData}/>
+      <ModalToDelete isOpen={activeModalDelete} onOpen={onOpenModalDelete} type="Motorcycle" item={motorcycleToEdit} user={undefined}/>
       <Table removeWrapper aria-label="Table to render" selectionMode="single" color="warning" defaultSelectedKeys={['1']} >
         <TableHeader columns={columnsToRender}>
           {columnsToRender.map((column) =>

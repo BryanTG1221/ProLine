@@ -17,10 +17,11 @@ type props = {
   dataToRender: Array<Car>
   selectCar: (row: Car) => void | null
   defaultCar: string
+  syncData: () => void
 }
 
 
-export function CustomTable ({ columnsToRender, dataToRender, selectCar }: props) {
+export function CustomTable ({ columnsToRender, dataToRender, selectCar, syncData }: props) {
   const [activeModal, setActiveModal] = useState(false)
   const [activeModalDelete, setActiveModalDelete] = useState(false)
   const [carToEdit, setCarToEdit] = useState<Car>()
@@ -66,7 +67,7 @@ export function CustomTable ({ columnsToRender, dataToRender, selectCar }: props
               </Button>
             </Tooltip>
             <Tooltip color="danger" content="Delete car">
-              <Button variant="light" color="danger" isIconOnly onPress={onOpenModalDelete}>
+              <Button variant="light" color="danger" isIconOnly onPress={onOpenModalDelete} onClick={() => setCarToEdit(car)}>
                 <MdDeleteOutline className={Styles.iconDelete} />
               </Button>
             </Tooltip>
@@ -80,8 +81,8 @@ export function CustomTable ({ columnsToRender, dataToRender, selectCar }: props
   useEffect(() => { selectCar(dataToRender[0]) },[dataToRender, selectCar])
   return (
     <div className={Styles.container}>
-      <ModalCar isOpen={activeModal} onOpen={onOpenModal} item={carToEdit} />
-      <ModalToDelete isOpen={activeModalDelete} onOpen={onOpenModalDelete} />
+      <ModalCar isOpen={activeModal} onOpen={onOpenModal} item={carToEdit} syncData={syncData} />
+      <ModalToDelete isOpen={activeModalDelete} onOpen={onOpenModalDelete} item={carToEdit} type={"Car"} user={undefined}/>
       <Table removeWrapper aria-label="Table to render" selectionMode="single" color="warning" defaultSelectedKeys={['1']} >
         <TableHeader columns={columnsToRender}>
           {columnsToRender.map((column) =>

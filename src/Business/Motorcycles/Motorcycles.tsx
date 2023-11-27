@@ -8,9 +8,14 @@ export function Motorcycles () {
   const [motorcycles, setMotorcycles] = useState<Motorcycle[]>([])
   const [selected, setSelected] = useState<Motorcycle | undefined>()
   const [defaultKey, setDefault] = useState('')
+  const [sync, setSync] = useState(true)
 
   function activeSelected (motorcycle: Motorcycle) {
     setSelected(motorcycle)
+  }
+
+  function handleSync() {
+    setSync(true)
   }
   
   useEffect(() => {
@@ -18,11 +23,11 @@ export function Motorcycles () {
       const fetchingData = await fetch('http://127.0.0.1:5000/api/motorcycles/')
       const data = await fetchingData.json()
       setMotorcycles(data)
-      console.log(data)
       setDefault(data[0].model) 
+      setSync(false)
     }
     GetData()
-  }, [])
+  }, [sync])
   const columnsData = [
     {
       key: 'brand',
@@ -51,7 +56,7 @@ export function Motorcycles () {
   ]
   return (
     <div className={Styles.container}>
-      <CustomTable columnsToRender={columnsData} dataToRender={motorcycles} selectCar={activeSelected} defaultCar={defaultKey} />
+      <CustomTable columnsToRender={columnsData} dataToRender={motorcycles} selectCar={activeSelected} defaultCar={defaultKey} syncData={handleSync} />
       <DetailSelected item={selected} />
     </div>
   )

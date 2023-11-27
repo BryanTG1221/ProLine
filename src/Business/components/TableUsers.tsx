@@ -14,9 +14,10 @@ type columnsStruct = {
 type props = {
   columnsToRender: Array<columnsStruct>
   dataToRender: Array<User>
+  syncData: () => void
 }
 
-export function UserTable ({ columnsToRender, dataToRender }: props) {
+export function UserTable ({ columnsToRender, dataToRender, syncData }: props) {
   const [activeModal, setActiveModal] = useState(false)
   const [activeModalDelete, setActiveModalDelete] = useState(false)
   const [userToEdit, setUserToEdit] = useState<User>()
@@ -50,12 +51,12 @@ export function UserTable ({ columnsToRender, dataToRender }: props) {
           <div className="relative flex items-center gap-2">
             <Tooltip content="Edit user">
               <Button isIconOnly color="default" variant="light" onPress={onOpenModal} onClick={() => setUserToEdit(user)}>
-                <AiOutlineEdit className={Styles.icon} />
+                <AiOutlineEdit className={Styles.iconEdit} />
               </Button>
             </Tooltip>
             <Tooltip color="danger" content="Delete user">
               <Button isIconOnly color="danger" variant="light" onPress={onOpenModalDelete} onClick={() => setUserToEdit(user)}>
-                <MdDeleteOutline className={Styles.icon} />
+                <MdDeleteOutline className={Styles.iconDelete} />
               </Button>
             </Tooltip>
           </div>
@@ -66,8 +67,8 @@ export function UserTable ({ columnsToRender, dataToRender }: props) {
   }, [activeModal, activeModalDelete]);
   return (
     <div className={Styles.containerTable}>
-      <ModalUsers isOpen={activeModal} onOpen={onOpenModal} item={userToEdit} />
-      <ModalToDelete isOpen={activeModalDelete} onOpen={onOpenModalDelete} />
+      <ModalUsers isOpen={activeModal} onOpen={onOpenModal} item={userToEdit} syncData={syncData}/>
+      <ModalToDelete isOpen={activeModalDelete} onOpen={onOpenModalDelete} user={userToEdit} type={"User"} item={undefined}  />
       <Table removeWrapper aria-label="Table to render" >
         <TableHeader columns={columnsToRender}>
           {columnsToRender.map((column) =>

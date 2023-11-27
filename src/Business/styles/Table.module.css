@@ -4,7 +4,7 @@
   background-color: white;
   display: flex;
   justify-content: flex-star;
-  align-items: start;
+  align-items: flex-start;
   border: 1px solid var(--borderUI);
   padding: 16px 8px;
   border-radius: 12px;
@@ -16,7 +16,7 @@
   background-color: white;
   display: flex;
   justify-content: flex-star;
-  align-items: start;
+  align-items: flex-start;
   border: 1px solid var(--borderUI);
   padding: 16px 8px;
   border-radius: 12px;

@@ -8,21 +8,30 @@ export function Cars () {
   const [cars, setCars] = useState<Car[]>([])
   const [selected, setSelected] = useState<Car | undefined>()
   const [defaultKey, setDefault] = useState('')
+  const [sync, setSync] = useState(true)
 
   function activeSelected (car: Car) {
     setSelected(car)
   }
 
+  function handleSync() {
+    setSync(true)
+  }
+
+  async function GetData () {
+    const fetchingData = await fetch('http://127.0.0.1:5000/api/vehicles/')
+    const data = await fetchingData.json()
+    setCars(data)
+    setDefault(data[0].model)
+    setSync(false)
+  }
+
   useEffect(() => {
-    async function GetData () {
-      const fetchingData = await fetch('http://127.0.0.1:5000/api/vehicles/')
-      const data = await fetchingData.json()
-      setCars(data)
-      console.log(data)
-      setDefault(data[0].model)
+    if (sync) {
+      GetData()
     }
-    GetData()
-  }, [])
+  }, [sync])
+
   const columnsData = [
     {
       key: 'brand',
@@ -51,7 +60,7 @@ export function Cars () {
   ]
   return (
     <div className={Styles.container}>
-      <CustomTable columnsToRender={columnsData} dataToRender={cars} selectCar={activeSelected} defaultCar={defaultKey} />
+      <CustomTable columnsToRender={columnsData} dataToRender={cars} selectCar={activeSelected} defaultCar={defaultKey} syncData={handleSync} />
       <DetailSelected item={selected} />
     </div>
   )

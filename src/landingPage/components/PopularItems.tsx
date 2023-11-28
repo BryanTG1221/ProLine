@@ -4,6 +4,7 @@ import { PiHorse } from "react-icons/pi";
 import { MdSpeed } from "react-icons/md";
 import { GoGear } from "react-icons/go";
 import Styles from '@stylesLanding/PopularItes.module.css'
+import { Link } from 'react-router-dom';
 
 type renderCar = {
   item: Car
@@ -34,7 +35,9 @@ function CardCar ({ item }: renderCar) {
           {item.torque} Nm
         </p>
       </div>
-      <Button type='button' color='primary' style={{backgroundColor: 'var(--primaryColor)', width: '95%', borderRadius: '4px'}}>Configurar</Button>
+      <Link to={`/cars/${item.id}`} style={{width: '95%'}}>  
+        <Button type='button' color='primary' style={{backgroundColor: 'var(--primaryColor)', width: '100%', borderRadius: '4px'}}>Configurar</Button>
+      </Link>
     </div>
   )
 }
@@ -60,7 +63,9 @@ function CardMotorcycle ({item}: renderMotorcycles) {
           {item.power} CV
         </p>
       </div>
-      <Button type='button' color='primary' style={{backgroundColor: 'var(--primaryColor)', width: '95%', borderRadius: '4px'}}>Configurar</Button>
+      <Link to={`/cars/${item.id}`} style={{width: '95%'}}>
+        <Button type='button' color='primary' style={{backgroundColor: 'var(--primaryColor)', width: '100%', borderRadius: '4px'}}>Configurar</Button>
+      </Link>
     </div>
   )
 }

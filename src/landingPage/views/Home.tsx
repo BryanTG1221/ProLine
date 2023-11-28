@@ -30,8 +30,10 @@ export function HomePage () {
         <Divider />
         <img src={Brands} width={650} />
       </section>
-      <PopularItems type='Cars' item={cars} />
-      <PopularItems type='Motorcycles' item={motorcycle} />
+      <div style={{width: '85%', display: 'flex', flexDirection:'column', alignItems: 'center', justifyContent: 'center'}}>
+        <PopularItems type='Cars' item={cars} />
+        <PopularItems type='Motorcycles' item={motorcycle} />
+      </div>
       <Footer />
     </main>
   )

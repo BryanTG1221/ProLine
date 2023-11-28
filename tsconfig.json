@@ -30,7 +30,8 @@
       "@contexts/*": ["./src/contexts/*"],
       "@business/*": ["./src/business/*"],
       "@businessStyles/*": ["./src/business/styles/*"],
-      "@interfaces/*": ["./src/interfaces/*"]
+      "@interfaces/*": ["./src/interfaces/*"],
+      "@firebaseApp/*": ["./src/firebase/*"]
     }
   },
   "include": ["src"],

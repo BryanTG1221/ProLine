@@ -1,7 +1,8 @@
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, UseDisclosureProps, Button, Input, Select, SelectItem } from '@nextui-org/react'
-import { useEffect, useState, ChangeEvent } from 'react'
+import { useEffect, useState, ChangeEvent, SetStateAction } from 'react'
 import { Car, Motorcycle, User } from '@interfaces/types'
 import Styles from '@businessStyles/modals.module.css'
+import { uploadCar } from '@firebaseApp/firebase'
 
 
 type Props = {
@@ -43,10 +44,10 @@ export function ModalCar({ isOpen, onOpen, item, syncData }: UseDisclosureProps 
   useEffect(() => {
     setFormData({
       brand: item?.brand || '',
-    model: item?.model || '',
-    year: item?.year ? String(item.year) : '0',
-    stock: item?.stock ? String(item.stock) : '0',
-    price: item?.price ? String(item.price) : '0',
+      model: item?.model || '',
+      year: item?.year ? String(item.year) : '0',
+      stock: item?.stock ? String(item.stock) : '0',
+      price: item?.price ? String(item.price) : '0',
     });
   }, [item]);
 
@@ -308,6 +309,7 @@ export function ModalToDelete({ isOpen, onOpen, item, type, user, syncData }: Us
 }
 
 export function ModalAddCar ({ isOpen, onOpen, syncData }: UseDisclosureProps & UserProps) {
+  const [imageToUpload, setImage] = useState()
   const [brands, setBrands] = useState<Brands[]>()
   const [formData, setFormData] = useState<Car>({
     id: 0,
@@ -343,16 +345,23 @@ export function ModalAddCar ({ isOpen, onOpen, syncData }: UseDisclosureProps & 
   }, []);
 
   async function handleAdd () {
-    const fetchingData = await fetch('http://127.0.0.1:5000/api/vehicles/', { 
-      method: 'POST',
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(formData)
-     })
-     const repsonse = await fetchingData.json()
-     console.log(repsonse)
-    syncData()
+    // const fetchingData = await fetch('http://127.0.0.1:5000/api/vehicles/', { 
+    //   method: 'POST',
+    //   headers: {"Content-Type": "application/json"},
+    //   body: JSON.stringify(formData)
+    //  })
+    //  const repsonse = await fetchingData.json()
+    //  console.log(repsonse)
+    // syncData()
+    console.log(formData.brand)
+    const URLImage = await uploadCar({ "file": imageToUpload, "folder": `Cars/${formData.brand}`})
+    console.log(URLImage)
   }
 
+  function handleImage(event: { target: { files: SetStateAction<undefined>[] } }) {
+    console.log(event.target.files[0])
+    setImage(event.target.files[0])
+  }
   return (
     <Modal isOpen={isOpen} onOpenChange={onOpen} size='5xl'>
       <ModalContent>
@@ -388,6 +397,9 @@ export function ModalAddCar ({ isOpen, onOpen, syncData }: UseDisclosureProps & 
                   </div>
                   <div className={Styles.containerRow}>
                     <Input label="Price" size='sm' type='number' onChange={(e) => handleInputChange(e, 'price')} value={String(formData.price)} />
+                  </div>
+                  <div>
+                    <input accept="image/jpg" type='file' onChange={handleImage} />
                   </div>
                 </section>
               </ModalBody>

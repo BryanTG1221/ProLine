@@ -15,7 +15,8 @@ export default defineConfig({
       "@contexts": '/src/contexts',
       "@business": '/src/Business',
       "@businessStyles": '/src/Business/styles',
-      "@interfaces": '/src/interfaces'
+      "@interfaces": '/src/interfaces',
+      "@firebaseApp": '/src/firebase'
     }
   }
 })

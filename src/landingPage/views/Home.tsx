@@ -3,7 +3,7 @@ import Brands from '@assets/Brands.png'
 import { Mouse } from '@landingComponents/Mouse'
 import Styles from '@stylesLanding/Home.module.css'
 import { Divider } from '@nextui-org/react'
-import { PopularItems } from '@landingComponents/PopularItems'
+import { PopularItemsLanding } from '@landingComponents/PopularItems'
 import { Footer } from '@landingComponents/Footer'
 import { useEffect, useState } from 'react'
 
@@ -31,8 +31,8 @@ export function HomePage () {
         <img src={Brands} width={650} />
       </section>
       <div style={{width: '85%', display: 'flex', flexDirection:'column', alignItems: 'center', justifyContent: 'center'}}>
-        <PopularItems type='Cars' item={cars} />
-        <PopularItems type='Motorcycles' item={motorcycle} />
+        <PopularItemsLanding type='Cars' item={cars} />
+        <PopularItemsLanding type='Motorcycles' item={motorcycle} />
       </div>
       <Footer />
     </main>

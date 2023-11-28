@@ -12,7 +12,7 @@ export function MotorcyclesDetail () {
   
   useEffect(() => {
     async function getCarByID() {
-      const fetchingData = await fetch(`http://127.0.0.1:5000/api/vehicles/${id}`)
+      const fetchingData = await fetch(`http://127.0.0.1:5000/api/motorcycles/${id}`)
       const response = await fetchingData.json()
       console.log(response)
       setMotorcycle(response)

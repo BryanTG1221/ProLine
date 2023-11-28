@@ -18,7 +18,7 @@ export function CarsLanding () {
   }, [cars])
 
   return (
-    <section className={Styles.containerDetail}>
+    <section className={Styles.containerDetailLanding}>
       <NavBarLanding />
       <div style={{width:'85%', display: 'flex', justifyContent: 'center'}}>
         <PopularItems type='Cars' item={cars} />

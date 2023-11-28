@@ -18,7 +18,7 @@ export function MotorcyclesLanding () {
   }, [motorcycles])
 
   return (
-    <section className={Styles.containerMain}>
+    <section className={Styles.containerDetail}>
       <NavBarLanding />
       <div style={{width:'85%', display: 'flex', justifyContent: 'center'}}>
         <PopularItems item={motorcycles} type='motorcycles' />

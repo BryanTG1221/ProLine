@@ -1,9 +1,87 @@
-.containerMain {
+.containerDetail {
   width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
-  padding: 16px;
+  overflow: hidden;
+  position: relative;
+  padding-top: 12px;
+  gap: 20px;
+}
+
+.content {
+  width: 80%;
+  height: 500px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) 70px;
+  grid-template-rows: 50px repeat(4, 70px);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  position: relative;
+}
+.img-responsive {
+  object-fit: cover;
+  -webkit-user-drag: none;
+  user-select: none;
+  image-rendering: optimizeQuality;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+}
+
+.gradientDiv {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  background: linear-gradient(180deg, rgba(38, 38, 38, 0.396), rgba(0, 0, 0, 0.111) 40.63%, rgba(255, 255, 255, 0) 100%);
+}
+
+.sectionInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: white;
+  z-index: 101;
+  position: absolute;
+  left: 0;
+  line-height: 64px;
+  padding-top: 40px;
+}
+
+.brand {
+  font-size: 48px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.model {
+  font-size: 80px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.priceItem, .speedmaxItem, .powerItem {
+  width: 100%;
+  height: 100%;
+  grid-column: 5 / 6;
+  grid-row: 2;
+  padding: 8px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  z-index: 103;
+  border-radius: 8px;
+}
+
+.speedmaxItem {
+  grid-row: 3;
+}
+
+.powerItem {
+  grid-row: 4;
 }

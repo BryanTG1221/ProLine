@@ -10,7 +10,7 @@ import { Users } from '@business/Users/Users'
 import { CarsLanding } from '@landingPage/Cars/Cars'
 import { MotorcyclesLanding } from "@landingPage/Motorcycles/Motorcycles";
 import { CarDetail } from "@landingPage/Cars/CarDetail";
-import { MotorcycleDetail } from "@landingPage/Motorcycles/Detail";
+import { MotorcyclesDetail } from "@landingPage/Motorcycles/Detail";
 
 export const router = createBrowserRouter([
   {
@@ -35,7 +35,7 @@ export const router = createBrowserRouter([
   },
   {
     path: 'motorcycles/:id',
-    element: <MotorcycleDetail />
+    element: <MotorcyclesDetail />
   },
   {
     path: '/admin',

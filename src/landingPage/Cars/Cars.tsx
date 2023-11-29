@@ -15,7 +15,7 @@ export function CarsLanding () {
 
   useEffect(() => {
     GetData()
-  }, [cars])
+  }, [])
 
   return (
     <section className={Styles.containerDetailLanding}>

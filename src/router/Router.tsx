@@ -1,8 +1,9 @@
-import { createBrowserRouter } from "react-router-dom";
+import { PropsWithChildren, useContext } from "react"; 
+import { createBrowserRouter, Navigate } from "react-router-dom";
+import { UserContext } from '@contexts/User'
 import { HomePage } from '@landingPage/views/Home'
 import { Login } from '@auth/Login'
 import { Business } from '@business/Business'
-import { Dashboard } from '@business/Dashboard/Dashboard'
 import { Cars } from '@business/Cars/Cars'
 import { Motorcycles } from '@business/Motorcycles/Motorcycles'
 import { Sells } from '@business/Sells/Sells'
@@ -11,11 +12,23 @@ import { CarsLanding } from '@landingPage/Cars/Cars'
 import { MotorcyclesLanding } from "@landingPage/Motorcycles/Motorcycles";
 import { CarDetail } from "@landingPage/Cars/CarDetail";
 import { MotorcyclesDetail } from "@landingPage/Motorcycles/Detail";
+import { ErrorPage } from './404'
+
+function ProtectedRoute ({ children }: PropsWithChildren) {
+  const userContext = useContext(UserContext)
+  console.log(userContext?.token)
+  if ((userContext?.token !== '')) {
+    return children
+  } else {
+    return <Navigate to='/' />
+  }
+}
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />
+    element: <HomePage />,
+    errorElement: <ErrorPage />
   },
   {
     path: "/login",
@@ -39,12 +52,8 @@ export const router = createBrowserRouter([
   },
   {
     path: '/admin',
-    element: <Business />,
+    element: <Business><ProtectedRoute></ProtectedRoute></Business>,
     children: [
-      {
-        path: 'dashboard',
-        element: <Dashboard />
-      }, 
       {
         path: 'cars',
         element: <Cars />

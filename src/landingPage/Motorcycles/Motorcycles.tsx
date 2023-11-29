@@ -15,7 +15,7 @@ export function MotorcyclesLanding () {
 
   useEffect(() => {
     GetData()
-  }, [motorcycles])
+  }, [])
 
   return (
     <section className={Styles.containerDetailLanding}>

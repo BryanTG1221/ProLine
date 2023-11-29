@@ -46,7 +46,7 @@ function CardMotorcycle ({item}: renderMotorcycles) {
   return (
     <div className={Styles.card}>
       <div className={Styles.containerImg}>
-
+        <img src={item.urlImage} className={Styles.imgData} />
       </div>
       <p className={Styles.titleCard}>{item.brand} {item.model}</p>
       <div className={Styles.containerInfo}>

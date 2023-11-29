@@ -345,17 +345,19 @@ export function ModalAddCar ({ isOpen, onOpen, syncData }: UseDisclosureProps & 
   }, []);
 
   async function handleAdd () {
-    // const fetchingData = await fetch('http://127.0.0.1:5000/api/vehicles/', { 
-    //   method: 'POST',
-    //   headers: {"Content-Type": "application/json"},
-    //   body: JSON.stringify(formData)
-    //  })
-    //  const repsonse = await fetchingData.json()
-    //  console.log(repsonse)
-    // syncData()
-    console.log(formData.brand)
-    const URLImage = await uploadCar({ "file": imageToUpload, "folder": `Cars/${formData.brand}`})
-    console.log(URLImage)
+    const URLImage = uploadCar({ "file": imageToUpload, "folder": `Cars/${formData.brand}`})
+    URLImage
+    .then((response) => {
+      const fetchingData = fetch('http://127.0.0.1:5000/api/vehicles/', { 
+        method: 'POST',
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({...formData, urlImage: response})
+       })
+       fetchingData
+       .then((response) => {
+         syncData()
+       })
+    })
   }
 
   function handleImage(event: { target: { files: SetStateAction<undefined>[] } }) {
@@ -419,6 +421,7 @@ export function ModalAddCar ({ isOpen, onOpen, syncData }: UseDisclosureProps & 
 }
 
 export function ModalAddMotorcycles ({ isOpen, onOpen, syncData }: UseDisclosureProps & UserProps) {
+  const [imageToUpload, setImage] = useState()
   const [brands, setBrands] = useState<Brands[]>()
   const [formData, setFormData] = useState<Motorcycle>({
     id: 0,
@@ -451,14 +454,24 @@ export function ModalAddMotorcycles ({ isOpen, onOpen, syncData }: UseDisclosure
   }, []);
 
   async function handleAdd () {
-    const fetchingData = await fetch('http://127.0.0.1:5000/api/motorcycles/', { 
-      method: 'POST',
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(formData)
-     })
-     const repsonse = await fetchingData.json()
-     console.log(repsonse)
-    syncData()
+    const URLImage = uploadCar({ "file": imageToUpload, "folder": `Motorcycles/${formData.brand}`})
+    URLImage
+    .then((response) => {
+      const fetchingData = fetch('http://127.0.0.1:5000/api/motorcycles/', { 
+        method: 'POST',
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({...formData, urlImage: response})
+       })
+       fetchingData
+       .then((response) => {
+         syncData()
+       })
+    })
+  }
+
+  function handleImage(event: { target: { files: SetStateAction<undefined>[] } }) {
+    console.log(event.target.files[0])
+    setImage(event.target.files[0])
   }
 
   return (
@@ -487,6 +500,7 @@ export function ModalAddMotorcycles ({ isOpen, onOpen, syncData }: UseDisclosure
                     <Input label="Price" size='sm' type='number' onChange={(e) => handleInputChange(e, 'price')} value={String(formData.price)} />
                   </div>
                 </section>
+                <input accept="image/jpg" type='file' onChange={handleImage} />
               </ModalBody>
               <ModalFooter>
                 <Button color="default" variant="light" onPress={onClose}>

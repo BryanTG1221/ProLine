@@ -58,7 +58,6 @@ export function UserToLogin () {
             <DropdownItem aria-label="description" classNames={{base: Styles.textUser }} startContent={<FiLogIn />} description="Here you can login and access to buy cars" style={{ fontSize: '1.2rem' }}>
               <Link key="Login" to="/login">Sign In</Link>
             </DropdownItem>
-            <DropdownItem aria-label="description" classNames={{base: Styles.textUser }} startContent={<FiUser />} description="Here you can register to start to buy" style={{ fontSize: '1.2rem' }}>Register</DropdownItem>
           </DropdownSection>
         </DropdownMenu>
       </Dropdown>

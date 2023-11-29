@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 24px;
+}
+
+
+.containerInfo {
+  width: 80%;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 48px;
+  padding: 40px;
+}
+
+.containerTitle {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 24px;
+  padding-top: 24px;
+}
+
+.title {
+  font-size: 100px;
+  font-weight: 500;
+  color: var(--primaryColor);
+  margin: 0;
+  position: absolute;
+  z-index: 2;
+}
+
+.titleBack {
+  font-size: 100px;
+  font-weight: 500;
+  color: var(--textUI);
+  margin: 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.subtitle {
+  font-size: 32px;
+  max-width: 32ch;
+  color: var(--textUI);
+  margin: 0;
+  padding-left: 24px;
+}

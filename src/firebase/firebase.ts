@@ -16,7 +16,12 @@ const app = initializeApp(firebaseConfig);
 
 export const storage = getStorage(app);
 
-export async function uploadCar ({file, folder}) {
+type props = {
+  file: File
+  folder: string
+}
+
+export async function uploadCar ({file, folder}: props) {
     const storageDriversRef = ref(storage, `${folder}/` + file.name);
     const uploadBytesResponse = await uploadBytes(storageDriversRef, file);
     const downloadURL = await getDownloadURL(uploadBytesResponse.ref);

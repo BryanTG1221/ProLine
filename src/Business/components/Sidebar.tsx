@@ -1,4 +1,3 @@
-import { RxDashboard } from "react-icons/rx";
 import { PiSteeringWheelLight } from "react-icons/pi";
 import { PiMotorcycleLight } from "react-icons/pi";
 import { PiCoinLight } from "react-icons/pi";
@@ -19,13 +18,10 @@ export function Sidebar () {
   return (
     <nav className={Styles.container}>
       <header className={Styles.header}>
-        <img src={LogoIcon} width={20} />
+        <Link to="/">
+          <img src={LogoIcon} width={20} />
+        </Link>
         <ul className={Styles.list}>
-          <li className={Styles.containerItem}>
-            <Link to="/admin/dashboard">
-              <RxDashboard className={`${Styles.icon} ${page === "/admin/dashboard" ? Styles.iconActive : ""}`} />
-            </Link>
-          </li>
           <li className={Styles.containerItem}>
             <Link to="/admin/cars">
               <PiSteeringWheelLight className={`${Styles.icon} ${page === "/admin/cars" ? Styles.iconActive : ""}`} />

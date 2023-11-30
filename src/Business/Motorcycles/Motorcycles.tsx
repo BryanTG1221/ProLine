@@ -1,4 +1,3 @@
-import { DetailSelected } from '@business/components/DetailSelected'
 import { CustomTable } from '@business/components/TableMotorcycles'
 import { useEffect, useState } from 'react'
 import { Motorcycle } from '@interfaces/types'
@@ -9,21 +8,14 @@ import { Button } from '@nextui-org/react'
 
 export function Motorcycles () {
   const [motorcycles, setMotorcycles] = useState<Motorcycle[]>([])
-  const [selected, setSelected] = useState<Motorcycle | undefined>()
-  const [defaultKey, setDefault] = useState('')
   const [sync, setSync] = useState(true)
   const [modalAdd, setModalAdd] = useState(false)
-
-  function activeSelected (motorcycle: Motorcycle) {
-    setSelected(motorcycle)
-  }
   
   useEffect(() => {
     async function GetData () {
       const fetchingData = await fetch('http://127.0.0.1:5000/api/motorcycles/')
       const data = await fetchingData.json()
       setMotorcycles(data)
-      setDefault(data[0].model) 
       setSync(false)
     }
     GetData()
@@ -70,8 +62,7 @@ export function Motorcycles () {
         <Button startContent={<FaPlus />} style={{width: 'fit-content'}} variant='flat' color='success' onPress={handleModal}>Add motorcycle </Button>
       </div>
       <section className={Styles.containerSections}>
-        <CustomTable columnsToRender={columnsData} dataToRender={motorcycles} selectCar={activeSelected} defaultCar={defaultKey} syncData={handleSync} />
-        <DetailSelected item={selected} />
+        <CustomTable columnsToRender={columnsData} dataToRender={motorcycles} syncData={handleSync} />
       </section>
     </div>
   )

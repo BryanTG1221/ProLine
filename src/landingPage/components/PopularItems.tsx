@@ -36,7 +36,7 @@ function CardCar ({ item }: renderCar) {
         </p>
       </div>
       <Link to={`/cars/${item.id}`} style={{width: '95%'}}>  
-        <Button type='button' color='primary' style={{backgroundColor: 'var(--primaryColor)', width: '100%', borderRadius: '4px'}}>Configurar</Button>
+        <Button type='button' color='primary' style={{backgroundColor: 'var(--primaryColor)', width: '100%', borderRadius: '4px'}}>Comprar</Button>
       </Link>
     </div>
   )
@@ -64,7 +64,7 @@ function CardMotorcycle ({item}: renderMotorcycles) {
         </p>
       </div>
       <Link to={`/motorcycles/${item.id}`} style={{width: '95%'}}>
-        <Button type='button' color='primary' style={{backgroundColor: 'var(--primaryColor)', width: '100%', borderRadius: '4px'}}>Configurar</Button>
+        <Button type='button' color='primary' style={{backgroundColor: 'var(--primaryColor)', width: '100%', borderRadius: '4px'}}>Comprar</Button>
       </Link>
     </div>
   )
@@ -106,7 +106,7 @@ export function PopularItems ({ type, item }: type){
 }
 
 export function PopularItemsLanding ({ type, item }: type){
-  const slicedItems = item.slice(0, 8); // Obtener los primeros 6 elementos
+  const slicedItems = item.slice(0, 4); // Obtener los primeros 6 elementos
 
   if (type === 'Cars') {
     return (

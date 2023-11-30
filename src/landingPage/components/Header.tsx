@@ -12,9 +12,6 @@ export function Header() {
             <p className={Styles.titleBrand}>Ducati</p>
             <p className={Styles.titleModel}>Panigale V4</p>
             <p className={Styles.descriptionText}>El nuevo Panigale V4 tiene una estética de carrera y es más fácil de pilotar, lo que hace que tanto los pilotos profesionales como los aficionados se sientan cómodos en su propia batalla personal contra el cronómetro.</p>
-            <Button color="danger" type='button' style={{ width: 150, backgroundColor: '#FF3E3E', borderRadius: '8px', marginTop: '12px' }}>
-              Configurar
-            </Button>
           </div>
         </section>
         <section className={Styles.containerMotorcycle}>

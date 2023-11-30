@@ -4,7 +4,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { AiOutlineEdit } from "react-icons/ai";
 import { Car } from '@interfaces/types'
 import Styles from '@businessStyles/Table.module.css'
-import { useEffect, Key, useCallback, useState } from "react"
+import { Key, useCallback, useState } from "react"
 import { ModalCar, ModalToDelete } from "./Modals";
 
 type columnsStruct = {
@@ -15,13 +15,11 @@ type columnsStruct = {
 type props = {
   columnsToRender: Array<columnsStruct>
   dataToRender: Array<Car>
-  selectCar: (row: Car) => void | null
-  defaultCar: string
   syncData: () => void
 }
 
 
-export function CustomTable ({ columnsToRender, dataToRender, selectCar, syncData }: props) {
+export function CustomTable ({ columnsToRender, dataToRender, syncData }: props) {
   const [activeModal, setActiveModal] = useState(false)
   const [activeModalDelete, setActiveModalDelete] = useState(false)
   const [carToEdit, setCarToEdit] = useState<Car>()
@@ -78,12 +76,11 @@ export function CustomTable ({ columnsToRender, dataToRender, selectCar, syncDat
     }
   },[activeModal, activeModalDelete]);
 
-  useEffect(() => { selectCar(dataToRender[0]) },[dataToRender, selectCar])
   return (
     <div className={Styles.container}>
       <ModalCar isOpen={activeModal} onOpen={onOpenModal} item={carToEdit} syncData={syncData} />
       <ModalToDelete isOpen={activeModalDelete} onOpen={onOpenModalDelete} item={carToEdit} type={"Car"} user={undefined} syncData={syncData} />
-      <Table removeWrapper aria-label="Table to render" selectionMode="single" color="warning" defaultSelectedKeys={['1']} >
+      <Table removeWrapper aria-label="Table to render" selectionMode="single" color="warning" >
         <TableHeader columns={columnsToRender}>
           {columnsToRender.map((column) =>
             <TableColumn key={column.key}>{column.label}</TableColumn>

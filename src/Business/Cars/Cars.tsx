@@ -9,14 +9,8 @@ import { Button } from '@nextui-org/react'
 
 export function Cars () {
   const [cars, setCars] = useState<Car[]>([])
-  const [selected, setSelected] = useState<Car | undefined>()
-  const [defaultKey, setDefault] = useState('')
   const [sync, setSync] = useState(true)
   const [modalAdd, setModalAdd] = useState(false)
-
-  function activeSelected (car: Car) {
-    setSelected(car)
-  }
 
   function handleSync() {
     setSync(true)
@@ -29,7 +23,6 @@ export function Cars () {
     const fetchingData = await fetch('http://127.0.0.1:5000/api/vehicles/')
     const data = await fetchingData.json()
     setCars(data)
-    setDefault(data[0].model)
     setSync(false)
   }
 
@@ -72,8 +65,7 @@ export function Cars () {
         <Button startContent={<FaPlus />} style={{width: 'fit-content'}} variant='flat' color='success' onPress={handleModal}>Add car </Button>
       </div>
       <section className={Styles.containerSections}>
-        <CustomTable columnsToRender={columnsData} dataToRender={cars} selectCar={activeSelected} defaultCar={defaultKey} syncData={handleSync} />
-        <DetailSelected item={selected} />
+        <CustomTable columnsToRender={columnsData} dataToRender={cars} syncData={handleSync} />
       </section>
     </div>
   )

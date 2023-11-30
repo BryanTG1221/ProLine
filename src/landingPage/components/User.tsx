@@ -5,7 +5,7 @@ import { PiCoinLight } from "react-icons/pi";
 import { RiUser3Line } from "react-icons/ri";
 import { IoCarSportOutline, IoExitOutline  } from "react-icons/io5";
 import { TbBike } from "react-icons/tb";
-import { FiUser, FiLogIn } from "react-icons/fi";
+import { FiLogIn } from "react-icons/fi";
 import { Link } from 'react-router-dom';
 import Styles from '@landingPage/styles/User.module.css'
 

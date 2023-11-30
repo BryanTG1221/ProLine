@@ -3,6 +3,7 @@ import { useEffect, useState, ChangeEvent, SetStateAction } from 'react'
 import { Car, Motorcycle, User } from '@interfaces/types'
 import Styles from '@businessStyles/modals.module.css'
 import { uploadCar } from '@firebaseApp/firebase'
+import toast from 'react-hot-toast'
 
 
 type Props = {
@@ -59,10 +60,13 @@ export function ModalCar({ isOpen, onOpen, item, syncData }: UseDisclosureProps 
 
   async function handleSubmit() {
     const fetchingToUpdate = await fetch(`http://127.0.0.1:5000/api/vehicles/${item?.id}`, {method: 'PUT', body: JSON.stringify(formData), headers: {"Content-Type": "application/json",}})
+    if (fetchingToUpdate.ok) {
+      toast.success("Se realizo la edicion con exito")
+    } else {
+      toast.error("Hubo un error al editar")
+    }
     const response = fetchingToUpdate.json()
-    console.log(response) 
     syncData()
-    console.log("Realizar petición HTTP con los valores:", formData);
   }
 
   return (
@@ -134,9 +138,13 @@ export function ModalMotorcycle({ isOpen, onOpen, item, syncData }: UseDisclosur
 
   async function handleSubmit() {
     const fetchingToUpdate = await fetch(`http://127.0.0.1:5000/api/motorcycles/${item?.id}`, {method: 'PUT', body: JSON.stringify(formData), headers: {"Content-Type": "application/json",}})
+    if (fetchingToUpdate.ok) {
+      toast.success("Se realizo la edicion con exito")
+    } else {
+      toast.error("Hubo un error al editar")
+    }
     const response = fetchingToUpdate.json()
     syncData()
-    console.log(response) 
   }
   return (
     <>
@@ -204,9 +212,13 @@ export function ModalUsers({ isOpen, onOpen, item, syncData }: UseDisclosureProp
       body: JSON.stringify(formData),
       headers: { "Content-Type": "application/json" },
     });
+    if (fetchingToUpdate.ok) {
+      toast.success("Se realizo la edicion con exito")
+    } else {
+      toast.error("Hubo un error al editar")
+    }
     const response = await fetchingToUpdate.json();
     syncData()
-    console.log(response);
   }
 
   return (
@@ -270,13 +282,14 @@ export function ModalToDelete({ isOpen, onOpen, item, type, user, syncData }: Us
       });
 
       if (response.ok) {
+        toast.success("Se elimino con exito")
         onOpen();
         syncData()
       } else {
-        console.error('Error al eliminar el elemento');
+        toast.error("Error al eliminar el elemento")
       }
     } catch (error) {
-      console.error('Error de red:', error);
+      toast.error("Error de red")
     }
   };
 
@@ -355,7 +368,9 @@ export function ModalAddCar ({ isOpen, onOpen, syncData }: UseDisclosureProps & 
        })
        fetchingData
        .then((response) => {
-         syncData()
+          toast.success("Agregado con exito")
+          syncData()
+          onOpen()
        })
     })
   }
@@ -464,7 +479,10 @@ export function ModalAddMotorcycles ({ isOpen, onOpen, syncData }: UseDisclosure
        })
        fetchingData
        .then((response) => {
+        console.log(response)
+        toast.success("Se agrego con exito")
          syncData()
+         onOpen()
        })
     })
   }
@@ -543,8 +561,14 @@ export function ModalAddUser ({ isOpen, onOpen, syncData }: UseDisclosureProps &
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(formData)
      })
+     if (fetchingData.ok) {
+      toast.success("Se creo con exito el usuario")
+     } else {
+      toast.error("Hubo un error al crear el usuario")
+     }
      const repsonse = await fetchingData.json()
      console.log(repsonse)
+     onOpen()
     syncData()
   }
 
